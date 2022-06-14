@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+import service.UserService;
+
 
 @WebServlet("/InsertServlet")
 public class InsertServlet extends HttpServlet {
@@ -20,12 +23,25 @@ public class InsertServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		doGet(request, response);
+		User us = new User();
+		
+		UserService service = new UserService();
+		
+		us.setPersonName(request.getParameter("name"));
+		us.setUserName(request.getParameter("userName"));
+		us.setUserPassword(request.getParameter("password"));
+		us.setBirthday(request.getParameter("birthday"));
+		us.setCpf(request.getParameter("cpf"));
+		us.setPhoto(request.getParameter("photo"));
+		
+		if(service.insert(us)) {
+			response.sendRedirect("menu.jsp");
+		}
 	}
 
 }
