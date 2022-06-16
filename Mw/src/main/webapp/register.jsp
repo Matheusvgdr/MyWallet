@@ -35,7 +35,7 @@
 	<div>
 		<nav>
 			<ul>
-				<li><a href="menu.jsp">Home</a></li>
+				<li><a href="home.jsp">Home</a></li>
 			</ul>
 		</nav>
 	</div>	

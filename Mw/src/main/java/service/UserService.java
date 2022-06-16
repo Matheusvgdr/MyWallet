@@ -21,4 +21,7 @@ public class UserService {
 		
 		return user.deleteUser(idUser = Integer.parseInt(id));
 	}
+	public User searchForId(int id) {
+		return user.searchForId(id);
+	}
 }

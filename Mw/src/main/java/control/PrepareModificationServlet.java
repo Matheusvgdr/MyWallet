@@ -10,48 +10,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
 import model.User;
+import service.UserService;
 
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/PrepareModificationServlet")
+public class PrepareModificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public LoginServlet() {
+       
+ 
+    public PrepareModificationServlet() {
         super();
-   
-    }
 
-	
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doPost(request, response);
-		
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String user = request.getParameter("userName");
-		String password = request.getParameter("password");
-		User u = null;
+
+		UserService service = new UserService();
+		User user = new User();
+		
+		String idRequest = request.getParameter("id");
 		
 		HttpSession session = request.getSession();
 		
-		UserDAO dao = new UserDAO();
+		user = service.searchForId(Integer.parseInt(idRequest));
 		
-		u = dao.consultUser(user, password);
-		
-		if(!Objects.isNull(u)) {
-			
-			session.setAttribute("userSession", u.getUserName());
-			response.sendRedirect("home.jsp");
-			
+		if(!Objects.isNull(user)) {
+			session.setAttribute("userSelected", user);
+			response.sendRedirect("modifyUser.jsp");
 		} else {
-			
 			response.sendRedirect("error.jsp");
 		}
+		
+		
 	}
 
 }

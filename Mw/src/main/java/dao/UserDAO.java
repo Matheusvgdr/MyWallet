@@ -13,7 +13,42 @@ public class UserDAO {
 
 	Connection conex = null;
 
-	//Modificar usuário
+	public User searchForId(int id) {
+		
+		User us = null;
+		ResultSet rs = null;
+		conex = DAO.createConnection();
+		
+		String sql = "SELECT * FROM tb_users WHERE id=?";
+		
+		try {
+			PreparedStatement ps = conex.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				us = new User();
+				
+				us.setId(rs.getInt("id"));
+				us.setPersonName(rs.getString("personName"));
+				us.setUserName(rs.getString("userName"));
+				us.setCpf(rs.getString("cpf"));
+				us.setUserPassword(rs.getString("userPassword"));
+				us.setBirthday(rs.getString("birthday"));
+				us.setPhoto(rs.getString("photo"));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return us;
+	
+	}
+	
+	//Modificar usuï¿½rio
 	public boolean modifyUser(User us) {
 		
 		boolean result = true;
@@ -53,7 +88,7 @@ public class UserDAO {
 		
 	}
 	
-	//Consultar usuário
+	//Consultar usuï¿½rio
 	public User consultUser(String login, String pass) {
 
 		User usu = null;
@@ -87,7 +122,7 @@ public class UserDAO {
 
 	}
 	
-	//Inserir usuário
+	//Inserir usuï¿½rio
 	public boolean insertUser(User usr) {
 
 		boolean result = true;
@@ -122,7 +157,7 @@ public class UserDAO {
 
 	}
 	
-	//Deletar usuário
+	//Deletar usuario
 	public boolean deleteUser(int id) {
 
 		boolean result = true;
@@ -153,7 +188,7 @@ public class UserDAO {
 
 	}
 	
-	//Listar todos os usuários
+	//Listar todos os usuï¿½rios
 	public List<User> listUser(){
 		
 		List<User> listOfUsers = new ArrayList<User>();

@@ -72,7 +72,7 @@
 						<%=usr.getPhoto() %>
 					</td>
 					<td>
-						<a href="alterar.jsp?id=<%=usr.getId()%>"><img src="images/edit.png" width="24px"/></a>
+						<a href="PrepareModificationServlet?id=<%=usr.getId()%>"><img src="images/edit.png" width="24px"/></a>
 					</td>
 					<td>
 						<img src="images/delete.png" width="24px" onclick="confirmDelete(<%=usr.getId()%>)"/>
@@ -85,7 +85,7 @@
 	<div>
 			<nav>
 				<ul>
-					<li><a href="cadastrar.jsp">Incluir Usuário</a></li>
+					<li><a href="register.jsp">Incluir Usuário</a></li>
 					<li><a href="index.html">Logout</a></li>
 				</ul>
 			</nav>

@@ -7,36 +7,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
 import service.UserService;
 
-@WebServlet("/DeleteServlet")
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/ModifyUserServlet")
+public class ModifyUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public DeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+    public ModifyUserServlet() {
+        super();
+       
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doPost(request, response);
-		
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id = request.getParameter("id");
-		
+		User user = new User();
 		UserService service = new UserService();
 		
-		if(service.delete(id)) {
-			
-			response.sendRedirect("home.jsp");
-		}
+		user.setId(Integer.parseInt(request.getParameter("id")));
+		user.setPersonName(request.getParameter("personName"));
+		user.setUserName(request.getParameter("userName"));
+		user.setUserPassword(request.getParameter("userPassword"));
+		user.setCpf(request.getParameter("cpf"));
+		user.setPhoto(request.getParameter("photo"));
+		user.setBirthday(request.getParameter("birthday"));
 		
+		if(service.modify(user)) {
+			response.sendRedirect("home.jsp");
 	}
 
+	}
 }

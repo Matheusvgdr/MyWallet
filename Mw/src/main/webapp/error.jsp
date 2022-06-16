@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Errp</h1>
+	<h1>Error page</h1>
 </body>
 </html>

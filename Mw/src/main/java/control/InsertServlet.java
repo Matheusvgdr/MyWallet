@@ -40,7 +40,7 @@ public class InsertServlet extends HttpServlet {
 		us.setPhoto(request.getParameter("photo"));
 		
 		if(service.insert(us)) {
-			response.sendRedirect("menu.jsp");
+			response.sendRedirect("home.jsp");
 		}
 	}
 
