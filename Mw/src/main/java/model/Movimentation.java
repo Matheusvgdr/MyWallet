@@ -3,18 +3,25 @@ package model;
 import java.util.Date;
 
 public class Movimentation {
-	private Date moviDate;
+	private int id;
+	private String moviDate;
 	private double money;
 	private String notes;
 	private String type;
 	
+	public int getId() {
+		return id;
+	}
 	
-	public Date getMoviDate() {
+	public void setId(int id) {
+		this.id = id; 
+	}
+	public String getMoviDate() {
 		return moviDate;
 	}
 
 
-	public void setMoviDate(Date moviDate) {
+	public void setMoviDate(String moviDate) {
 		this.moviDate = moviDate;
 	}
 

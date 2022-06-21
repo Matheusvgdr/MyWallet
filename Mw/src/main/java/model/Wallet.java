@@ -4,11 +4,18 @@ import java.util.Date;
 
 public class Wallet {
 	
+	private int id;
 	private String nameWallet;
 	private double budget;
-	private Date openCount;
 	
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id; 
+	}
 	public String getNameWallet() {
 		return nameWallet;
 	}
@@ -29,19 +36,9 @@ public class Wallet {
 	}
 
 
-	public Date getOpenCount() {
-		return openCount;
-	}
-
-
-	public void setOpenCount(Date openCount) {
-		this.openCount = openCount;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Wallet [nameWallet=" + nameWallet + ", budget=" + budget + ", openCount=" + openCount + "]";
+		return "Wallet [nameWallet=" + nameWallet + ", budget=" + budget + ", openCount=" + "]";
 	}
 	
 	
