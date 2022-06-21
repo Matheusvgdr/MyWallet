@@ -7,34 +7,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.WalletDAO;
-import model.Movimentation;
 import model.Wallet;
+import service.WalletService;
 
-@WebServlet("/DepositServlet")
-public class DepositServlet extends HttpServlet {
+@WebServlet("/InsertWalletServlet")
+public class InsertWalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public DepositServlet() {
+       
+    public InsertWalletServlet() {
         super();
-   
+       
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//Wallet wa = new Wallet();
-		//WalletDAO dao = new WalletDAO();
-		//wa.setBudget(Integer.parseInt(request.getParameter("money")) + wa.getBudget());
 		
-		String escolha = request.getParameter("type");
+		WalletService service = new WalletService();
+		Wallet wallet = new Wallet();
 		
+		wallet.setNameWallet(request.getParameter("nameWlt"));
+		wallet.setBudget(Integer.parseInt(request.getParameter("value")));
 		
-
+		if(service.insert(wallet)) {
+			response.sendRedirect("movimentation.html");
+		}
 	}
 
 }

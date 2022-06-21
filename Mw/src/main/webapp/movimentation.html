@@ -6,12 +6,23 @@
 </head>
 <body>
 	<form action="DepositServlet" method="post">
-		<labe>Quantia que deseja sacar</labe>
-		<input type="text" name="money" id="money"/>
-	<input type="submit" value="Sacar"/>
+		<select name="type" id="type">
+		  <option>Saque</option>
+		  <option>Depósito</option>
+		</select>
+		<input type="hidden" name="type" id="type" placeholder="valor"/>
+		
+		<input type="number" name="value" id="value" placeholder="Quantia"/>
+		<input type="submit" value="Executar"/>
+	
 	</form>
 	
-	<labe>Quantia que deseja depositar</labe>
-	<input type="text" name="" id=""/>
+	<form action="InsertWalletServlet" method="post">
+	<labe>Name's wallet</labe>
+	<input name="nameWlt" id="nameWlt" type="text"/>
+	<input name="value" id="value" type="text"/>
+	<input type="submit" value="Criar"/>
+	</form>
+	
 </body>
 </html>

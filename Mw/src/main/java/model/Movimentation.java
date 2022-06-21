@@ -8,7 +8,25 @@ public class Movimentation {
 	private double money;
 	private String notes;
 	private String type;
+	private int id_user;
+	private int id_type;
 	
+	public int getId_user( ) {
+		return id_user;
+	}
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
+	}
+
+	public int getId_type() {
+		return id_type;
+	}
+
+	public void setId_type(int id_type) {
+		this.id_type = id_type;
+	}
+
 	public int getId() {
 		return id;
 	}

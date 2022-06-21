@@ -129,7 +129,7 @@ public Wallet searchForId(int id) {
 
 		return result;
 
-	}
+	} 
 	public List<Wallet> listWallet(){
 		
 		List<Wallet> listOfWallets = new ArrayList<Wallet>();
@@ -170,7 +170,7 @@ public Wallet searchForId(int id) {
 
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_wallet(budget) VALUES (?);";
+		String sql = "INSERT INTO tb_wallet(nameWallet, budget) VALUES (?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
