@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.MovimentationDAO;
+import dao.TypeMovDAO;
 import dao.WalletDAO;
 import model.Movimentation;
 import model.Wallet;
@@ -26,14 +28,25 @@ public class DepositServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//Wallet wa = new Wallet();
-		//WalletDAO dao = new WalletDAO();
-		//wa.setBudget(Integer.parseInt(request.getParameter("money")) + wa.getBudget());
+		Movimentation m = new Movimentation();
 		
-		String escolha = request.getParameter("type");
+		int va = Integer.parseInt(request.getParameter("money"));
+		String data = request.getParameter("dateMovi");
+		String tipo = request.getParameter("typeM");
+		String idU = request.getParameter("idUser");
+		String idT = request.getParameter("idType");
 		
+		m.setMoney(va);
+		m.setMoviDate(data);
+		m.setType(tipo);
+		m.setId_user(Integer.parseInt(idU));
+		m.setId_type(Integer.parseInt(idT));
 		
+		MovimentationDAO dao = new MovimentationDAO();
+		
+		dao.insertMovimentation(m);
+		
+		response.sendRedirect("movimentatio.jsp");
 
 	}
 

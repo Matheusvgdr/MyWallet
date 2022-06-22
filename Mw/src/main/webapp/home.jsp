@@ -24,6 +24,8 @@
 	<h1>Menu</h1>
 	<%String name = (String)session.getAttribute("userSession"); %>
 	
+	
+	
 	<h2>Bem vindo ao sistema, <%=name %></h2>
 	
 	<div>
@@ -63,13 +65,7 @@
 						<%=usr.getUserPassword() %>
 					</td>
 					<td>
-						<%=usr.getBirthday() %>
-					</td>
-					<td>
 						<%=usr.getCpf() %>
-					</td>
-					<td>
-						<%=usr.getPhoto() %>
 					</td>
 					<td>
 						<a href="PrepareModificationServlet?id=<%=usr.getId()%>"><img src="images/edit.png" width="24px"/></a>
@@ -87,8 +83,16 @@
 				<ul>
 					<li><a href="register.jsp">Incluir Usuário</a></li>
 					<li><a href="index.html">Logout</a></li>
+					
+					<li><a href="movimentatio.jsp">Deposito</a></li>
+					
 				</ul>
 			</nav>
+			<form action="InserTypeServlet" method="post">
+				<input type="hidden" name="deposit" id="deposit" value="deposito"/>
+				<input type="hidden" name="nome" id="nome" value="<%=name %>"/>
+				<input type="submit" value="depositar"/>
+			</form>
 		</div>
 </body>
 </html>

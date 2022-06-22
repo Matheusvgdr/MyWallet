@@ -7,9 +7,8 @@ public class User {
 	private String personName;
 	private String userName;
 	private String cpf;
-	private String birthday;
 	private String userPassword;
-	private String photo;
+
 	
 	
 	public int getId() {
@@ -52,16 +51,6 @@ public class User {
 	}
 
 
-	public String getBirthday() {
-		return birthday;
-	}
-
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-
 	public String getUserPassword() {
 		return userPassword;
 	}
@@ -72,20 +61,11 @@ public class User {
 	}
 
 
-	public String getPhoto() {
-		return photo;
-	}
-
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", personName=" + personName + ", userName=" + userName + ", cpf=" + cpf
-				+ ", birthday=" + birthday + ", userPassword=" + userPassword + ", photo=" + photo + "]";
+				 + ", userPassword=" + userPassword + "]";
 	}
 	
 	

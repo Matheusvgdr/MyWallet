@@ -35,8 +35,7 @@ public class UserDAO {
 				us.setUserName(rs.getString("userName"));
 				us.setCpf(rs.getString("cpf"));
 				us.setUserPassword(rs.getString("userPassword"));
-				us.setBirthday(rs.getString("birthday"));
-				us.setPhoto(rs.getString("photo"));
+				
 			}
 			
 		} catch (SQLException e) {
@@ -56,7 +55,7 @@ public class UserDAO {
 
 		conex = DAO.createConnection();
 
-		String sql = "UPDATE tb_users SET personName = ?, userName = ?, birthday = ?, cpf = ?, photo = ?, userPassword = ? WHERE id=?;";
+		String sql = "UPDATE tb_users SET personName = ?, userName = ?, cpf = ?, userPassword = ? WHERE id=?;";
 
 		try {
 
@@ -64,9 +63,7 @@ public class UserDAO {
 
 			ps.setString(1, us.getPersonName());
 			ps.setString(2, us.getUserName());
-			ps.setString(3, us.getBirthday());
 			ps.setString(4, us.getCpf());
-			ps.setString(5, us.getPhoto());
 			ps.setString(6, us.getUserPassword());
 			ps.setInt(7, us.getId());
 
@@ -130,7 +127,7 @@ public class UserDAO {
 
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_users(personName, userName, userPassword, birthday, photo, cpf) VALUES (?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO tb_users(personName, userName, userPassword, cpf) VALUES (?, ?, ?, ?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -138,9 +135,7 @@ public class UserDAO {
 			ps.setString(1, usr.getPersonName());
 			ps.setString(2, usr.getUserName());
 			ps.setString(3, usr.getUserPassword());
-			ps.setString(4, usr.getBirthday());
-			ps.setString(5, usr.getPhoto());
-			ps.setString(6, usr.getCpf());
+			ps.setString(4, usr.getCpf());
 			
 			returnQuery = ps.executeUpdate();
 
@@ -211,9 +206,7 @@ public class UserDAO {
 				usr.setPersonName(rs.getString("personName"));
 				usr.setUserName(rs.getString("userName"));
 				usr.setUserPassword(rs.getString("userPassword"));
-				usr.setBirthday(rs.getString("birthday"));
 				usr.setCpf(rs.getString("cpf"));
-				usr.setPhoto(rs.getString("photo"));
 				
 				listOfUsers.add(usr);
 			}

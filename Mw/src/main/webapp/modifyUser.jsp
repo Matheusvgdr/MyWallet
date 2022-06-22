@@ -17,12 +17,10 @@
 			<input type="text" name="userName" id="userName" placeholder="Login para o usuário" size="20" value="<%=usr.getUserName()%>"/><br>
 			<label>Senha:</label>
 			<input type="password" name="userPassword" id="userPassword" placeholder="Senha" size="20" value="<%=usr.getUserPassword() %>"/><br>
-			<label>Birthday:</label>
-			<input type="password" name="birthday" id="birthday" placeholder="Senha" size="20" value="<%=usr.getBirthday() %>"/><br>
+	
 			<label>CPF:</label>
 			<input type="password" name="cpf" id="cpf" placeholder="Senha" size="20" value="<%=usr.getCpf() %>"/><br>
-			<label>Photo:</label>
-			<input type="password" name="photo" id="photo" placeholder="Senha" size="20" value="<%=usr.getPhoto() %>"/><br>
+			
 			<input type="submit" value="Gravar"/>
 		</form>
 		</div>

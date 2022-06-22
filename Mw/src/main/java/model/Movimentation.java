@@ -6,7 +6,6 @@ public class Movimentation {
 	private int id;
 	private String moviDate;
 	private double money;
-	private String notes;
 	private String type;
 	private int id_user;
 	private int id_type;
@@ -54,16 +53,6 @@ public class Movimentation {
 	}
 
 
-	public String getNotes() {
-		return notes;
-	}
-
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-
 	public String getType() {
 		return type;
 	}
@@ -76,7 +65,7 @@ public class Movimentation {
 
 	@Override
 	public String toString() {
-		return "Movimentation [moviDate=" + moviDate + ", money=" + money + ", notes=" + notes + ", type=" + type + "]";
+		return "Movimentation [moviDate=" + moviDate + ", money=" + money + ", type=" + type + "]";
 	}
 	
 	

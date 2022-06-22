@@ -33,8 +33,6 @@ public class ModifyUserServlet extends HttpServlet {
 		user.setUserName(request.getParameter("userName"));
 		user.setUserPassword(request.getParameter("userPassword"));
 		user.setCpf(request.getParameter("cpf"));
-		user.setPhoto(request.getParameter("photo"));
-		user.setBirthday(request.getParameter("birthday"));
 		
 		if(service.modify(user)) {
 			response.sendRedirect("home.jsp");

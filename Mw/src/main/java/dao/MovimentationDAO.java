@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Movimentation;
+import model.TypeMov;
+import model.User;
 import model.Wallet;
 
 public class MovimentationDAO {
@@ -75,10 +77,13 @@ public class MovimentationDAO {
 
 		boolean result = true;
 		int returnQuery;
-
+		
+		TypeMov t = new TypeMov();
+		User u = new User();
+		
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_wallet(moviDate, money, type, notes) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO tb_movimentation (moviDate, money, typeMovi, id_user, id_type) VALUES (?, ?, ?, ?,?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -86,7 +91,8 @@ public class MovimentationDAO {
 			ps.setString(1, mov.getMoviDate());
 			ps.setDouble(2, mov.getMoney());
 			ps.setString(3, mov.getType());
-			ps.setString(4, mov.getNotes());
+			ps.setInt(4, mov.getId_user());
+			ps.setInt(5, mov.getId_type());
 
 			returnQuery = ps.executeUpdate();
 
@@ -133,39 +139,40 @@ public class MovimentationDAO {
 
 	}
 
-	public List<Movimentation> listWallet() {
-
-		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
-		ResultSet rs = null;
-		Movimentation mvt = null;
-
-		conex = DAO.createConnection();
-
-		String sql = "SELECT * FROM tb_users";
-
-		try {
-			PreparedStatement ps = conex.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				mvt = new Movimentation();
-
-				mvt.setId(rs.getInt("id"));
-				mvt.setMoney(rs.getDouble("money"));
-				mvt.setMoviDate(rs.getString("moviDate"));
-				mvt.setNotes(rs.getString("notes"));
-				mvt.setType(rs.getString("type"));
-
-				listOfMovimentation.add(mvt);
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return listOfMovimentation;
-	}
+//	public List<Movimentation> listWallet() {
+//
+//		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
+//		ResultSet rs = null;
+//		Movimentation mvt = null;
+//
+//		conex = DAO.createConnection();
+//
+//		String sql = "SELECT * FROM tb_movimentation";
+//
+//		try {
+//			PreparedStatement ps = conex.prepareStatement(sql);
+//
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				mvt = new Movimentation();
+//
+//				mvt.setId(rs.getInt("id"));
+//				mvt.setMoney(rs.getDouble("money"));
+//				mvt.setMoviDate(rs.getString("moviDate"));
+//				mvt.setType(rs.getString("type"));
+//				mvt.setId_user(rs.getInt("id_user"));
+//				mvt.setId_type(rs.getInt("id_typev"));
+//
+//				listOfMovimentation.add(mvt);
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return listOfMovimentation;
+//	}
 
 	public boolean insertMoney(Movimentation mov) {
 

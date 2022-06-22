@@ -35,9 +35,7 @@ public class InsertServlet extends HttpServlet {
 		us.setPersonName(request.getParameter("name"));
 		us.setUserName(request.getParameter("userName"));
 		us.setUserPassword(request.getParameter("password"));
-		us.setBirthday(request.getParameter("birthday"));
 		us.setCpf(request.getParameter("cpf"));
-		us.setPhoto(request.getParameter("photo"));
 		
 		if(service.insert(us)) {
 			response.sendRedirect("home.jsp");

@@ -1,14 +1,20 @@
 package model;
 
-import java.util.Date;
-
 public class Wallet {
 	
 	private int id;
 	private String nameWallet;
 	private double budget;
+	private int id_user;
 	
-	
+	public int getId_user() {
+		return id_user;
+	}
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
+	}
+
 	public int getId() {
 		return id;
 	}
