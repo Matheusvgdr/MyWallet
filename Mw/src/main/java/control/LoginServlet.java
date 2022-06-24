@@ -45,10 +45,12 @@ public class LoginServlet extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		
 		u = dao.consultUser(user, password);
+		session.setAttribute("userSession", u.getUserName());
 		
 		if(!Objects.isNull(u)) {
 			
-			session.setAttribute("userSession", u.getUserName());
+			
+			
 
 			response.sendRedirect("home.jsp");
 			

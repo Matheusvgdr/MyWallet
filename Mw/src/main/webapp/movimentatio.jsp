@@ -13,7 +13,7 @@
 	
 	<form action="DepositServlet" method="post">
 		<labe>Data</labe>
-		<input name="dateMovi" id="dateMovi" type="calendar"/>
+		<input name="dateMovi" id="dateMovi" type="text"/>
 		
 		<labe>Money</labe>
 		<input name="money" id="money" type="number"/>

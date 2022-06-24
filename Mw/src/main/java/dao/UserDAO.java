@@ -63,9 +63,9 @@ public class UserDAO {
 
 			ps.setString(1, us.getPersonName());
 			ps.setString(2, us.getUserName());
-			ps.setString(4, us.getCpf());
-			ps.setString(6, us.getUserPassword());
-			ps.setInt(7, us.getId());
+			ps.setString(3, us.getCpf());
+			ps.setString(4, us.getUserPassword());
+			ps.setInt(5, us.getId());
 
 			returnQuery = ps.executeUpdate();
 

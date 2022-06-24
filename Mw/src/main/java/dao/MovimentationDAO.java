@@ -139,40 +139,41 @@ public class MovimentationDAO {
 
 	}
 
-//	public List<Movimentation> listWallet() {
-//
-//		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
-//		ResultSet rs = null;
-//		Movimentation mvt = null;
-//
-//		conex = DAO.createConnection();
-//
-//		String sql = "SELECT * FROM tb_movimentation";
-//
-//		try {
-//			PreparedStatement ps = conex.prepareStatement(sql);
-//
-//			rs = ps.executeQuery();
-//
-//			while (rs.next()) {
-//				mvt = new Movimentation();
-//
-//				mvt.setId(rs.getInt("id"));
-//				mvt.setMoney(rs.getDouble("money"));
-//				mvt.setMoviDate(rs.getString("moviDate"));
-//				mvt.setType(rs.getString("type"));
-//				mvt.setId_user(rs.getInt("id_user"));
-//				mvt.setId_type(rs.getInt("id_typev"));
-//
-//				listOfMovimentation.add(mvt);
-//
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		return listOfMovimentation;
-//	}
+	public List<Movimentation> listMov(int id) {
+
+		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
+		ResultSet rs = null;
+		Movimentation mvt = null;
+		conex = DAO.createConnection();
+
+		String sql = " SELECT * FROM tb_movimentation M INNER JOIN tb_users U ON U.id = M.id_user INNER JOIN tb_typeMovi T ON T.id = M.id_type WHERE id_user = ? ;";
+
+		try {
+			PreparedStatement ps = conex.prepareStatement(sql);
+			ps.setInt(1, id);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				mvt = new Movimentation();
+
+				mvt.setId(rs.getInt("id"));
+				mvt.setMoney(rs.getDouble("money"));
+				mvt.setMoviDate(rs.getString("moviDate"));
+				mvt.setType(rs.getString("typeMovi"));
+				mvt.setId_user(rs.getInt("id_user"));
+				mvt.setId_type(rs.getInt("id_type"));
+				
+
+				listOfMovimentation.add(mvt);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	return listOfMovimentation;
+	}
 
 	public boolean insertMoney(Movimentation mov) {
 

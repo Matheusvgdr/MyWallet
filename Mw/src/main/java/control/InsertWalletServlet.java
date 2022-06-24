@@ -30,9 +30,10 @@ public class InsertWalletServlet extends HttpServlet {
 		
 		wallet.setNameWallet(request.getParameter("nameWlt"));
 		wallet.setBudget(Integer.parseInt(request.getParameter("value")));
+		wallet.setId_user(Integer.parseInt(request.getParameter("idUs")));
 		
 		if(service.insert(wallet)) {
-			response.sendRedirect("movimentation.html");
+			response.sendRedirect("home.jsp");
 		}
 	}
 

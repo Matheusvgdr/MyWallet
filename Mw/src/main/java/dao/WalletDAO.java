@@ -79,13 +79,14 @@ public Wallet searchForId(int id) {
 
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_wallet(nameWallet, budget) VALUES (?, ?);";
+		String sql = "INSERT INTO tb_wallet(nameWallet, budget, id_user) VALUES (?, ?,?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
 
 			ps.setString(1, wallet.getNameWallet());
 			ps.setDouble(2, wallet.getBudget());
+			ps.setDouble(3, wallet.getId_user());
 	
 			returnQuery = ps.executeUpdate();
 
@@ -138,7 +139,7 @@ public Wallet searchForId(int id) {
 		
 		conex = DAO.createConnection();
 		
-		String sql = "SELECT * FROM tb_users";
+		String sql = "SELECT * FROM tb_wallet";
 		
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);

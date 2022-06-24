@@ -2,6 +2,10 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="dao.UserDAO" %>
 <%@page import="model.User" %>
+<%@page import="model.Wallet" %>
+<%@page import="dao.WalletDAO" %>
+<%@page import="dao.MovimentationDAO" %>
+<%@page import="model.Movimentation" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
@@ -77,11 +81,50 @@
 			<%
 			}
 			%>
+		</table><br>
+		<table border=1>
+			<tr>
+				<th>ID</th>
+				<th>NOME</th>
+				<th>Valo</th>
+				<th colspan=2></th>
+			</tr>
+			
+			<%
+			WalletDAO daoW = new WalletDAO();
+			List<Wallet> listW = new ArrayList<Wallet>();
+			
+			listW = daoW.listWallet();
+			
+			for(Wallet usr: listW){%>
+				<tr>
+					
+					<td>
+						<%=usr.getId()%>
+					</td>
+					<td>
+						<%=usr.getNameWallet()%>
+					</td>
+					
+					<td>
+						<%=usr.getBudget() %>
+					<td>
+						<a href="PrepareModificationServlet?id=<%=usr.getId()%>"><img src="images/edit.png" width="24px"/></a>
+					</td>
+					<td>
+						<img src="images/delete.png" width="24px" onclick="confirmDelete(<%=usr.getId()%>)"/>
+					</td>
+				</tr>
+			<%
+			}
+			%>
 		</table>
+		
 	<div>
 			<nav>
 				<ul>
 					<li><a href="register.jsp">Incluir Usuário</a></li>
+					<li><a href="register.jsp">Incluir carteira</a></li>
 					<li><a href="index.html">Logout</a></li>
 					
 					<li><a href="movimentatio.jsp">Deposito</a></li>
@@ -89,7 +132,7 @@
 				</ul>
 			</nav>
 			<form action="InserTypeServlet" method="post">
-				<input type="hidden" name="deposit" id="deposit" value="deposito"/>
+				<input type="hidden" name="deposit" id="deposit" value="1"/>
 				<input type="hidden" name="nome" id="nome" value="<%=name %>"/>
 				<input type="submit" value="depositar"/>
 			</form>

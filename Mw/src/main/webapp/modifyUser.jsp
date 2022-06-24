@@ -19,7 +19,7 @@
 			<input type="password" name="userPassword" id="userPassword" placeholder="Senha" size="20" value="<%=usr.getUserPassword() %>"/><br>
 	
 			<label>CPF:</label>
-			<input type="password" name="cpf" id="cpf" placeholder="Senha" size="20" value="<%=usr.getCpf() %>"/><br>
+			<input type="text" name="cpf" id="cpf" placeholder="Senha" size="20" value="<%=usr.getCpf() %>"/><br>
 			
 			<input type="submit" value="Gravar"/>
 		</form>

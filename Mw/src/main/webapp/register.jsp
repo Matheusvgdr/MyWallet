@@ -20,14 +20,22 @@
 			<label>Senha:</label>
 			<input type="password" name="password" id="password"/><br>
 			
-			<label>Data de nascimento : </label>
-			<input type="text" name="birthday" id="birthday"/><br>
-			
-			<label>Foto:</label>
-			<input type="text" name="photo" id="photo"/><br>
-			
 			<label>CPF:</label>
 			<input type="text" name="cpf" id="cpf" /><br>
+			
+			<input type="submit" value="Gravar"/>
+		</form>
+		
+		<form action="InsertWalletServlet" method="post">
+		
+			<label>Nome : </label>
+			<input type="text" name="nameWlt" id="nameWlt"/><br>
+			
+			<label>dinheiro:</label>
+			<input type="text" name="value" id="value"/><br>
+			<label>User:</label>
+			<input type="text" name="idUs" id="idUs"/><br>
+			
 			
 			<input type="submit" value="Gravar"/>
 		</form>

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
 import service.UserService;
@@ -37,7 +38,10 @@ public class InsertServlet extends HttpServlet {
 		us.setUserPassword(request.getParameter("password"));
 		us.setCpf(request.getParameter("cpf"));
 		
+		HttpSession session = request.getSession();
+		
 		if(service.insert(us)) {
+			session.setAttribute("userId", us);
 			response.sendRedirect("home.jsp");
 		}
 	}

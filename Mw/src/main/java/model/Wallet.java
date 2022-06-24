@@ -41,11 +41,11 @@ public class Wallet {
 		this.budget = budget;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Wallet [nameWallet=" + nameWallet + ", budget=" + budget + ", openCount=" + "]";
+		return "Wallet [id=" + id + ", nameWallet=" + nameWallet + ", budget=" + budget + ", id_user=" + id_user + "]";
 	}
+
 	
 	
 	
