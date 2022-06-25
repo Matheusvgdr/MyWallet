@@ -11,7 +11,10 @@ import dao.MovimentationDAO;
 import dao.TypeMovDAO;
 import dao.WalletDAO;
 import model.Movimentation;
+import model.TypeMov;
+import model.User;
 import model.Wallet;
+import service.MovimentationService;
 
 @WebServlet("/DepositServlet")
 public class DepositServlet extends HttpServlet {
@@ -29,24 +32,28 @@ public class DepositServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Movimentation m = new Movimentation();
+		User u = new User();
+		TypeMov tp = new TypeMov();
+		MovimentationService ms = new MovimentationService();
+				
+		u.setId(Integer.parseInt(request.getParameter("idUs")));
+		tp.setId(Integer.parseInt(request.getParameter("idType")));
 		
-		int va = Integer.parseInt(request.getParameter("money"));
-		String data = request.getParameter("dateMovi");
-		String tipo = request.getParameter("typeM");
-		String idU = request.getParameter("idUser");
-		String idT = request.getParameter("idType");
+		m.setMoney(Integer.parseInt(request.getParameter("money")));
+		m.setMoviDate(request.getParameter("dateMovi"));
+		m.setType(request.getParameter("typeM"));
+		m.setId_user(u);;
+		m.setId_type(tp);;
 		
-		m.setMoney(va);
-		m.setMoviDate(data);
-		m.setType(tipo);
-		m.setId_user(Integer.parseInt(idU));
-		m.setId_type(Integer.parseInt(idT));
 		
-		MovimentationDAO dao = new MovimentationDAO();
+		if(ms.insert(m)) {
+			response.sendRedirect("home.jsp");
+		}else {
+			response.sendRedirect("home.jsp");
+		}
 		
-		dao.insertMovimentation(m);
 		
-		response.sendRedirect("movimentatio.jsp");
+		
 
 	}
 

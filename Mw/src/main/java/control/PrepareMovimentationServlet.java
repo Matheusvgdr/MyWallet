@@ -1,41 +1,49 @@
 package control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import service.UserService;
+import model.TypeMov;
+import service.TypeMovService;
 
-@WebServlet("/DeleteServlet")
-public class DeleteServlet extends HttpServlet {
+
+@WebServlet("/PrepareMovimentationServlet")
+public class PrepareMovimentationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-    public DeleteServlet() {
+
+    public PrepareMovimentationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		doPost(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
+		TypeMovService servico = new TypeMovService();
 		
-		UserService service = new UserService();
+		List<TypeMov> listOfTypes = new ArrayList<TypeMov>();
 		
-		if(service.delete(id)) {
-			
-			response.sendRedirect("home.jsp");
-		}
+		HttpSession session = request.getSession();
+		
+		listOfTypes = servico.listar();
+		
+		session.setAttribute("typeMovi", listOfTypes);
+		
+		response.sendRedirect("movimentatio.jsp");
 		
 	}
 

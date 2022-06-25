@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.WalletDAO;
 import model.Wallet;
 
@@ -23,4 +25,9 @@ public class WalletService {
 		
 		return wallet.searchForId(id);
 	}
+	
+	public List<Wallet> listWallet(int idUser){
+		return wallet.listWallet(idUser);
+	}
 }
+

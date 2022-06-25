@@ -21,7 +21,6 @@ public class InsertServlet extends HttpServlet {
  
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doPost(request, response);
@@ -38,10 +37,9 @@ public class InsertServlet extends HttpServlet {
 		us.setUserPassword(request.getParameter("password"));
 		us.setCpf(request.getParameter("cpf"));
 		
-		HttpSession session = request.getSession();
+		
 		
 		if(service.insert(us)) {
-			session.setAttribute("userId", us);
 			response.sendRedirect("home.jsp");
 		}
 	}

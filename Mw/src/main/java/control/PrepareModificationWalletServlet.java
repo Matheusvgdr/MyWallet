@@ -10,53 +10,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
-import model.TypeMov;
-import model.User;
+import model.Wallet;
+import service.WalletService;
 
-
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/PrepareModificationWalletServlet")
+public class PrepareModificationWalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
-    public LoginServlet() {
+    public PrepareModificationWalletServlet() {
         super();
-   
+     
     }
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doPost(request, response);
-		
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String user = request.getParameter("userName");
-		String password = request.getParameter("password");
-		User u = null;
 		
-		TypeMov tm = new TypeMov();
+		WalletService serviceW = new WalletService();
+		
+		Wallet wallet = new Wallet();
 		
 		HttpSession session = request.getSession();
 		
-		UserDAO dao = new UserDAO();
+		//-----------------------------------------
 		
-		u = dao.consultUser(user, password);
-		
-		
-		if(!Objects.isNull(u)) {
-			
-			session.setAttribute("userSession", u);
+		String idRequest = request.getParameter("id");
+		wallet = serviceW.searchForId(Integer.parseInt(idRequest));
 
-			response.sendRedirect("home.jsp");
+		
+		//-----------------------------------------
+		
+		if(!Objects.isNull(wallet)) {
+			
+			session.setAttribute("walletSelected", wallet);
+			response.sendRedirect("modifyWallet.jsp");
 			
 		} else {
-			
 			response.sendRedirect("error.jsp");
 		}
+	
 	}
 
 }

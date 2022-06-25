@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.MovimentationDAO;
 import model.Movimentation;
 
@@ -24,5 +26,9 @@ public class MovimentationService {
 
 		return mvt.searchForId(id);
 
+	}
+	
+	public List<Movimentation> listMov(int idUser){
+		return mvt.listMov(idUser);
 	}
 }

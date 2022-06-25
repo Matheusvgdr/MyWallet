@@ -7,33 +7,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.WalletDAO;
-import model.Movimentation;
-import model.Wallet;
+import service.UserService;
 
-@WebServlet("/WithdrawServlet")
-public class WithdrawServlet extends HttpServlet {
+@WebServlet("/DeleteServlet")
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public WithdrawServlet() {
+   
+    public DeleteUserServlet() {
         super();
-  
+        // TODO Auto-generated constructor stub
     }
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doPost(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		Movimentation movi = new Movimentation();
 		
-		WalletDAO dao = new WalletDAO();
+		String id = request.getParameter("id");
 		
-		movi.setMoney(Integer.parseInt(request.getParameter("money")) - movi.getMoney());
-
+		UserService service = new UserService();
+		
+		if(service.delete(id)) {
+			
+			response.sendRedirect("home.jsp");
+		}
+		
 	}
 
 }

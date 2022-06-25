@@ -105,9 +105,12 @@ public class UserDAO {
 
 			while (rs.next()) {
 				usu = new User();
-
+				usu.setId(rs.getInt("id"));
 				usu.setUserName(rs.getString("userName"));
 				usu.setUserPassword(rs.getString("userPassword"));
+				usu.setPersonName(rs.getString("personName"));
+				usu.setCpf(rs.getString("cpf"));
+				
 
 			}
 
@@ -184,7 +187,7 @@ public class UserDAO {
 	}
 	
 	//Listar todos os usu�rios
-	public List<User> listUser(){
+	public List<User> listUser(int idU){
 		
 		List<User> listOfUsers = new ArrayList<User>();
 		ResultSet rs = null;
@@ -192,11 +195,11 @@ public class UserDAO {
 		
 		conex = DAO.createConnection();
 		
-		String sql = "SELECT * FROM tb_users";
+		String sql = "SELECT * FROM tb_users WHERE id= ?";
 		
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
-			
+			ps.setInt(1, idU);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
