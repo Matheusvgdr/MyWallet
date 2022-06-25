@@ -8,12 +8,8 @@ import model.Movimentation;
 public class MovimentationService {
 	MovimentationDAO mvt = new MovimentationDAO();
 
-	public boolean modify(Movimentation mov) {
-
-		return mvt.modifyMovimentation(mov);
-	}
-
 	public boolean insert(Movimentation mov) {
+		
 		return mvt.insertMovimentation(mov);
 	}
 
@@ -25,10 +21,15 @@ public class MovimentationService {
 	public Movimentation searchForId(int id) {
 
 		return mvt.searchForId(id);
-
+	}
+	
+	public Movimentation calcDeposits(int idUser) {
+		
+		return mvt.calcAll(idUser);
 	}
 	
 	public List<Movimentation> listMov(int idUser){
 		return mvt.listMov(idUser);
 	}
+	
 }

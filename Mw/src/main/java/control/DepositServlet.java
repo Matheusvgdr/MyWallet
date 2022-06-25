@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MovimentationDAO;
 import dao.TypeMovDAO;
@@ -31,6 +32,7 @@ public class DepositServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Movimentation m = new Movimentation();
 		User u = new User();
 		TypeMov tp = new TypeMov();
@@ -45,11 +47,13 @@ public class DepositServlet extends HttpServlet {
 		m.setId_user(u);;
 		m.setId_type(tp);;
 		
-		
+		HttpSession sessionM = request.getSession();
 		if(ms.insert(m)) {
+			sessionM.setAttribute("movimentation", m);
 			response.sendRedirect("home.jsp");
+			
 		}else {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("erro.html");
 		}
 		
 		

@@ -35,6 +35,11 @@ public class MovimentationDAO {
 
 				mov.setId(rs.getInt("id"));
 				mov.setMoney(rs.getDouble("money"));
+				mov.setMoviDate(rs.getString("moviDate"));
+				mov.setType(rs.getString("type"));
+				mov.getId_type().setId(rs.getInt("id_type"));;
+				mov.getId_user().setId(rs.getInt("id_user"));
+				
 
 			}
 
@@ -44,33 +49,6 @@ public class MovimentationDAO {
 		}
 
 		return mov;
-	}
-
-	public boolean modifyMovimentation(Movimentation mov) {
-		boolean result = true;
-		int returnQuery;
-
-		conex = DAO.createConnection();
-
-		String sql = "UPDATE tb_movimentation SET money = ? WHERE id = ?";
-
-		try {
-			PreparedStatement ps = conex.prepareStatement(sql);
-
-			ps.setDouble(1, mov.getMoney());
-
-			returnQuery = ps.executeUpdate();
-
-			if (returnQuery <= 0) {
-				result = false;
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		return result;
 	}
 
 	public boolean insertMovimentation(Movimentation mov) {
@@ -167,53 +145,24 @@ public class MovimentationDAO {
 		
 	return listOfMovimentation;
 	}
-
-	public boolean insertMoney(Movimentation mov) {
-
-		boolean result = true;
-		int returnQuery;
-
-		conex = DAO.createConnection();
-
-		String sql = "INSERT INTO tb_movimentation(money) VALUES (?);";
-
-		try {
-			PreparedStatement ps = conex.prepareStatement(sql);
-
-			ps.setDouble(1, mov.getMoney());
-
-			returnQuery = ps.executeUpdate();
-
-			if (returnQuery <= 0) {
-				result = false;
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		return result;
-	}
 	
-	public boolean withdrawMoney(Movimentation mov) {
-
-		boolean result = true;
-		int returnQuery;
-
+	public Movimentation calcAll(int id) {
+	
+		Movimentation mov = null;
+		ResultSet rs = null;
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_movimentation(money) VALUES (?);";
+		String sql = " SELECT SUM(money) FROM tb_movimentation WHERE id_type = ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
+			ps.setInt(1, id);
 
-			ps.setDouble(1, mov.getMoney());
+			rs = ps.executeQuery();
 
-			returnQuery = ps.executeUpdate();
+			while (rs.next()) {
+				mov = new Movimentation();
 
-			if (returnQuery <= 0) {
-				result = false;
 			}
 
 		} catch (SQLException e) {
@@ -221,7 +170,8 @@ public class MovimentationDAO {
 			e.printStackTrace();
 		}
 
-		return result;
+		return mov;
 	}
+
 
 }

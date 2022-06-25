@@ -15,22 +15,34 @@
 <title>Insert title here</title>
 
 <script>
-		function confirmDelete(id){
+		function confirmDeleteUser(id){
 			var answer = confirm("Confirma a exclusão do registro?");
 			
 			if(answer == true){
 				window.location.href = "DeleteServlet?id=" + id;
 			}
 		}
+		
+		function confirmDeleteWallet(id){
+			var answer = confirm("Confirma a exclusão do registro?");
+			
+			if(answer == true){
+				window.location.href = "DeleteWalletServlet?id=" + id;
+			}
+		}
+		
+		
 	</script>
 </head>
 <body>
 	<h1>Menu</h1>
 	<%User us = (User)session.getAttribute("userSession"); %>
+	<%Movimentation mo = (Movimentation)session.getAttribute("movimentation"); %>
 	
 	
 	
 	<h2>Bem vindo ao sistema, <%=us.getId() %></h2>
+	<h1>Saldo Atual: %></h1>
 	
 	<div>
 		<h2>Lista de Usuários</h2>
@@ -75,7 +87,7 @@
 						<a href="PrepareModificationServlet?id=<%=usr.getId()%>"><img src="images/edit.png" width="24px"/></a>
 					</td>
 					<td>
-						<img src="images/delete.png" width="24px" onclick="confirmDelete(<%=usr.getId()%>)"/>
+						<img src="images/delete.png" width="24px" onclick="confirmDeleteUser(<%=usr.getId()%>)"/>
 					</td>
 				</tr>
 			<%
@@ -87,6 +99,10 @@
 				<th>ID</th>
 				<th>NOME</th>
 				<th>Valor</th>
+				<th>Alterar</th>
+				<th>Deletar</th>
+				<th>Inserir</th>
+				<th>Retirar</th>
 				<th colspan=2></th>
 			</tr>
 			
@@ -112,7 +128,13 @@
 						<a href="PrepareModificationWalletServlet?id=<%=w.getId()%>"><img src="images/edit.png" width="24px"/></a>
 					</td>
 					<td>
-						<img src="images/delete.png" width="24px" onclick="confirmDel(<%=w.getId()%>)"/>
+						<img src="images/delete.png" width="24px" onclick="confirmDeleteWallet(<%=w.getId()%>)"/>
+					</td>
+					<td>
+						<a href="PrepareModificationWalletServlet?id=<%=w.getId()%>"><img src="images/edit.png" width="24px"/></a>
+					</td>
+					<td>
+						<img src="images/delete.png" width="24px" onclick="confirmDeleteWallet(<%=w.getId()%>)"/>
 					</td>
 				</tr>
 			<%
