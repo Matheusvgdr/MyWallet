@@ -33,7 +33,7 @@ public class DeleteUserServlet extends HttpServlet {
 		
 		if(service.delete(id)) {
 			
-			response.sendRedirect("pages/user.jsp");
+			response.sendRedirect("index.html");
 		}
 		
 	}

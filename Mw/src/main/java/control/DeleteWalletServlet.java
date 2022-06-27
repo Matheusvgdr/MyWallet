@@ -32,7 +32,7 @@ public class DeleteWalletServlet extends HttpServlet {
 
 		if (service.delete(id)) {
 
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 		}
 	}
 

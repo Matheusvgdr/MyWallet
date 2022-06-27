@@ -35,7 +35,7 @@ public class ModifyUserServlet extends HttpServlet {
 		user.setCpf(request.getParameter("cpf"));
 		
 		if(service.modify(user)) {
-			response.sendRedirect("pages/home.jsp");
+			response.sendRedirect("pages/user.jsp");
 	}
 
 	}

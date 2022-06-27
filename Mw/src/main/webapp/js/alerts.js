@@ -7,6 +7,7 @@
      })
  };
 
+ 
 let circle = document.querySelector(".circle");
 let a = document.querySelector(".wallet")
 let signUp = document.getElementById('link_signUp');
@@ -14,7 +15,7 @@ let signIn = document.getElementById('link_signIn');
 
 signUp.addEventListener('click', () => {
      circle.style.position = 'absolute';
-     circle.style.left = "-30rem" ;
+     circle.style.left = "-26rem" ;
      circle.style.transition = "2s";
 
     a.style.position = 'absolute';

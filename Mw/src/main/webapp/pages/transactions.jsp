@@ -1,6 +1,8 @@
 <%@page import="service.UserService" %>
 <%@page import="model.User" %>
 <%@page import="model.Wallet" %>
+<%@page import="model.TypeMov" %>
+<%@page import="dao.TypeMovDAO" %>
 <%@page import="service.WalletService" %>
 <%@page import="service.MovimentationService" %>
 <%@page import="model.Movimentation" %>
@@ -14,22 +16,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+    <title>Transactions</title>
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-    <link rel="stylesheet" href="../css/user.css">
-
-    <script>
-        function confirmDeleteUser(id){
-            var answer = confirm("Confirma a exclusão do registro?");
-            
-            if(answer == true){
-                window.location.href = "../DeleteUserServlet?id=" + id;
-            }
-        }
-        </script>
+    <link rel="stylesheet" href="../css/transactions.css">
 </head>
 
 <body>
@@ -37,6 +29,7 @@
        <!-------------------USUARIO LOGADO------------------------------>
 
        <%User us = (User)session.getAttribute("userSession"); %>
+
 
        <!--------------------------------------------------------------->
        
@@ -134,105 +127,74 @@
 
     <section id="main_user">
       
-        <div class="info">
-
-            <h2>Your infos</h2>
-
-            <div class="container_info">
-                <%
-                UserService serviceU = new UserService();
-                List<User> list = new ArrayList<User>();
+        <div class="transactions">
+        
+                <% 
+                List<TypeMov> list;
+                list = (ArrayList<TypeMov>)session.getAttribute("typeMovi");
+                TypeMovDAO t = new TypeMovDAO();
                 
-                list = serviceU.list(us.getId());
+                list = t.listar();
+                                    
+                %>
+        
+            <h2>Deposit or withdraw your money</h2>
+            <form action="../TransactionsServlet" method="post">
+                <input type="hidden" name="idUs" id="idUs" value="<%=us.getId() %>">
+
+                <div class="input-data">
+
+                    <input type="date" name="dateMovi" id="dateMovi" autocomplete="off" required>
+
+
+                </div>
+
+                <div class="input-data">
+
+                    <input type="number" name="money" id="money" autocomplete="off" required>
+                    <div class="underline"></div>
+
+                    <label>Money</label>
+
+                </div>
+
+                <div class="input-data">
+
+                    <input type="hidden" name="type" id="type" value="0" autocomplete="off" required>
+                    <div class="underline"></div>
+
+                    <label>Type</label>
+
+                </div>
+
+                <div class="input-data">
+
+                    <input type="hidden" name="userPassword" id="userPassword" autocomplete="off" required>
+                    <div class="underline"></div>
+
+
+                </div>
+
                 
-                for(User usr: list){%>
-
-                <div class="name">
-
-                    <span><strong>Name:</strong> <%=usr.getPersonName() %></span>
+                <select name="idType" id="idType">
+                
+                    <option value="0" ><strong>Select...</strong></option>
                     
-                </div>
-
-                <div class="underline"></div>
-
-                <div class="userName">
-                    <span><strong>Username:</strong> <%=usr.getUserName() %></span>
-                   
-                </div>
-
-                <div class="underline"></div>
-
-                <div class="password">
-                    <span><strong>Password:</strong> <%=usr.getUserPassword() %></span>
+                    <% for(TypeMov tp: list){%>
                     
-                </div>
-
-                <div class="underline"></div>
-
-                <div class="cpf">
-                    <span><strong>CPF:</strong><%=usr.getCpf() %></span>
-                   
-                </div>
-
-                <div class="underline"></div>
-
-                <div class="container_icons">
-                    <a href="../PrepareModificationServlet?id=<%=usr.getId()%>" id="edit"><i class='bx bx-edit icon '></i></a>
-                    <a href="#" onclick="confirmDeleteUser(<%=usr.getId()%>)"><i class='bx bx-x-circle icon '></i></a>
-                </div>
-
-            <%
-			}
-			%>
-            </div>
+                      <option value="<%=tp.getId() %>"><strong><%=tp.getDescription() %></strong></option>
+                      
+                      
+                      <% }%>
             
-        </div>
+                      
+                </select>
 
-        <div class="modification">
-            <h2>Change your datas</h2>
-            <form action="../ModifyUserServlet" method="post">
-                <input type="hidden" name="id" id="id" value="<%=us.getId() %>">
-
-                <div class="input-data">
-
-                    <input type="text" value="<%=us.getPersonName() %>" name="personName" id="personName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Name</label>
-
-                </div>
-
-                <div class="input-data">
-
-                    <input type="text" value="<%=us.getUserName() %>" name="userName" id="userName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Username</label>
-
-                </div>
-                <div class="input-data">
-
-                    <input type="text" value="<%=us.getUserPassword() %>" name="userPassword" id="userPassword" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Password</label>
-
-                </div>
-                <div class="input-data">
-
-                    <input type="text" value="<%=us.getCpf() %>" name="cpf" id="cpf" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>CPF</label>
-
-                </div>
-
-                <button class="btn">Modify</button>
+                <button class="btn">Enter</button>
 
             </form>
             
         </div>
-
         
 
     </section>

@@ -84,7 +84,42 @@ public class MovimentationDAO {
 		return result;
 
 	}
+	
+	public boolean verificar(Movimentation conta ) {
 
+			List<Movimentation> lis = new ArrayList<Movimentation>();
+		    List<Movimentation> listaW = new ArrayList<Movimentation>();
+
+			double calcD = 0;
+			
+			lis = this.listDeposits(conta.getId_user().getId(), 1);
+			
+			for(Movimentation i: lis){
+			
+				calcD += i.getMoney();
+				
+			}
+			
+			
+			double calcW = 0;
+			listaW = this.listWithdraw(conta.getId_user().getId(), 2);
+			
+			for(Movimentation i: listaW){
+			
+				calcW += i.getMoney();
+				
+			}
+			
+			double totalMoney = calcD - calcW;
+			
+			if(conta.getMoney() > totalMoney && conta.getId_type().getId() == 2 ) {
+				return false;
+				
+			}else {
+				
+				return true;
+			}
+	}
 	// Deleta uma movimentação de um usuário
 	public boolean deleteMovimentation(int id) {
 
@@ -122,9 +157,11 @@ public class MovimentationDAO {
 		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
 		ResultSet rs = null;
 		Movimentation mvt = null;
+		User u = null;
+		TypeMov tm = null;
 		conex = DAO.createConnection();
 
-		String sql = " SELECT * FROM tb_movimentation WHERE id_user= ?;";
+		String sql = "SELECT M.money, M.moviDate, U.personName, T.description FROM tb_movimentation M INNER JOIN tb_users U ON U.id = M.id_user INNER JOIN tb_typeMovi T ON T.id = M.id_type WHERE id_user = ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -132,11 +169,17 @@ public class MovimentationDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				u = new User();
+				tm = new TypeMov();
 				mvt = new Movimentation();
-
+				
+				mvt.setId_user(u);
+				mvt.setId_type(tm);
+				
 				mvt.setMoney(rs.getDouble("money"));
 				mvt.setMoviDate(rs.getString("moviDate"));
-				mvt.setType(rs.getString("typeMovi"));
+				mvt.getId_user().setPersonName(rs.getString("personName"));;
+				mvt.getId_type().setDescription(rs.getString("description"));
 
 				listOfMovimentation.add(mvt);
 

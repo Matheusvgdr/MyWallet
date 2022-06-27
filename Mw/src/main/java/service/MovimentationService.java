@@ -9,8 +9,14 @@ public class MovimentationService {
 	MovimentationDAO mvt = new MovimentationDAO();
 
 	public boolean insert(Movimentation mov) {
+		boolean insertValido = true;
 		
-		return mvt.insertMovimentation(mov);
+		if(mvt.verificar(mov)) {
+			insertValido = mvt.insertMovimentation(mov);
+		} else {
+			insertValido = false;
+		}
+		return insertValido;
 	}
 
 	public boolean delete(String id) {

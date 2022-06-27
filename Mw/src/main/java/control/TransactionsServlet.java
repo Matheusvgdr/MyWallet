@@ -17,11 +17,11 @@ import model.User;
 import model.Wallet;
 import service.MovimentationService;
 
-@WebServlet("/DepositServlet")
-public class DepositServlet extends HttpServlet {
+@WebServlet("/TransactionsServlet")
+public class TransactionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public DepositServlet() {
+    public TransactionsServlet() {
         super();
    
     }
@@ -43,16 +43,18 @@ public class DepositServlet extends HttpServlet {
 		
 		m.setMoney(Integer.parseInt(request.getParameter("money")));
 		m.setMoviDate(request.getParameter("dateMovi"));
-		m.setId_user(u);;
-		m.setId_type(tp);;
+		m.setType(request.getParameter("type"));
+		m.setId_user(u);
+		m.setId_type(tp);
 		
 		HttpSession sessionM = request.getSession();
+		
 		if(ms.insert(m)) {
 			sessionM.setAttribute("movimentation", m);
 			response.sendRedirect("pages/home.jsp");
 			
 		}else {
-			response.sendRedirect("erro.html");
+			response.sendRedirect("pages/erro.html");
 		}
 		
 		

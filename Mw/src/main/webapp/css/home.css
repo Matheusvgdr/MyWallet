@@ -466,3 +466,238 @@ body.dark .deposit{
         transform: translate3d(0, 5px, 0);
     } 
 }
+
+/*----------------------RESPOSIVITY --------------------*/
+
+@media (min-width: 1050px) and (max-width: 1499px){
+    #main{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 60px;
+        padding: 10rem;
+        width: 93vw;
+        position: absolute;
+        top: 0;
+        left: 13%;
+        height: 90vh;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ #main{
+        left: 6.8%;
+        height: 90vh;
+    }
+    
+    .main_container{
+        padding: 12px 20px;
+        
+    }
+    #main h2{
+        margin-bottom: 7px;
+    }
+    .money{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #52D5FF;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+    
+    .withdraw{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #FF5757;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+    
+    .wallets{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #D18A00;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+  
+    .deposit{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #03A66A;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+}
+
+
+@media (min-width: 1500px) and (max-width: 1750px){
+
+    #main{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 70px;
+        padding: 12rem;
+        width: 93vw;
+        position: absolute;
+        top: 0;
+        left: 13%;
+        height: 90vh;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ #main{
+        left: 6.8%;
+        height: 90vh;
+    }
+    
+    .main_container{
+        padding: 12px 20px;
+        
+    }
+    #main h2{
+        margin-bottom: 7px;
+    }
+    .money{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #52D5FF;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+    
+    .withdraw{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #FF5757;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+    
+    .wallets{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #D18A00;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+  
+    .deposit{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #03A66A;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+}
+
+@media (min-width: 1681px){
+    #main{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 70px;
+        padding: 12rem;
+        width: 93vw;
+        position: absolute;
+        top: 0;
+        left: 13%;
+        height: 90vh;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ #main{
+        left: 6.8%;
+        height: 90vh;
+    }
+    
+    .main_container{
+        padding: 12px 20px;
+        
+    }
+    #main h2{
+        margin-bottom: 7px;
+    }
+    .money{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #52D5FF;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+    
+    .withdraw{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #FF5757;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+    
+    .wallets{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #D18A00;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+  
+    .deposit{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--sidebar-color);
+        border-left: 10px solid #03A66A;
+        border-radius: 6px;
+        transition: var(--tran-05);
+        transform: scale(.95);
+    }
+
+}

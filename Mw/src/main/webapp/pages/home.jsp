@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>home</title>
     <link rel="stylesheet" href="../css/home.css">
 
     <!----===== Boxicons CSS ===== -->
@@ -23,13 +23,18 @@
 </head>
 
 <body>
-<%User us = (User)session.getAttribute("userSession"); %>
-	<%Movimentation mv = (Movimentation)session.getAttribute("movimentation"); %>
 
+     <!-------------------USUARIO LOGADO------------------------------>
+
+     <%User us = (User)session.getAttribute("userSession"); %>
+     <%Movimentation mv = (Movimentation)session.getAttribute("movimentation"); %>
+
+     <!--------------------------------------------------------------->
+     
     <nav class="sidebar close">
         <header>
             <li class="nav-link">
-                <a href="#">
+                <a href="user.jsp">
                     <i class='bx bx-user icon'></i>
                     <span class="text nav-text"><%=us.getUserName() %></span>
                 </a>
@@ -58,14 +63,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="TransactionsWallet.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
                             <span class="text nav-text">Withdraw money</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="TransactionsWallet.jsp">
                             <i class='bx bx-money icon'></i>
                             <span class="text nav-text">Deposit</span>
                         </a>
@@ -109,9 +114,14 @@
     <section class="home">
         <div class="text">Welcome to home</div>
     </section>
+
+    <% 
     
-	<% MovimentationDAO mo = new MovimentationDAO();
+    MovimentationDAO mo = new MovimentationDAO();
+
 	List<Movimentation> lis = new ArrayList<Movimentation>();
+    List<Movimentation> listaW = new ArrayList<Movimentation>();
+
 	double calcD = 0;
 	lis = mo.listDeposits(us.getId(), 1);
 	
@@ -121,7 +131,7 @@
 		
 	}
 	
-	List<Movimentation> listaW = new ArrayList<Movimentation>();
+	
 	double calcW = 0;
 	lis = mo.listWithdraw(us.getId(), 2);
 	
@@ -133,10 +143,6 @@
 	
 	double totalMoney = calcD - calcW;
 	%>
-	
-	<h1>Todos depositos: </h1>
-	
-
 
     <section id="main">
 
@@ -144,19 +150,11 @@
 
             <div class="main_container">
                 <h2> Day's Withdraw </h2>
-                <%
-                double operation;
-                if(calcD - calcW < 0){ 
-                	
-                operation = calcW - mv.getMoney();%>
-                
-                <span>R$  <%=operation %></span>
-                
-                <% } else{%>
+               
                 
                 <span>R$  <%=calcW %></span>
                 
-                <%} %>
+
             </div>
             <img src="../imgs/money_down.svg" alt="">
 
@@ -180,20 +178,18 @@
         <div class="money">
             <div class="main_container">
                 <h2>Money </h2>
-                
-                	<% 
+                <% 
                 	if(calcW > calcD){
                 		
                 	%>
-                		
-						<span>Não é possivel realizar o saque</span>
+                    <span>NÃ£o Ã© possivel realizar o saque</span>
 						
 					<% } else{%>
-					
+
                 <span>R$ <%=totalMoney %></span>
-                
-              	     <% } %>
-                
+
+                <% } %>
+
             </div>
             <img src="../imgs/money.svg" alt="">
         </div>

@@ -47,7 +47,7 @@ public class PrepareModificationWalletServlet extends HttpServlet {
 		if(!Objects.isNull(wallet)) {
 			
 			session.setAttribute("walletSelected", wallet);
-			response.sendRedirect("modifyWallet.jsp");
+			response.sendRedirect("pages/modifyWallet.jsp");
 			
 		} else {
 			response.sendRedirect("error.jsp");

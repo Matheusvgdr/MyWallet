@@ -42,7 +42,7 @@ public class PrepareModificationServlet extends HttpServlet {
 		
 		if(!Objects.isNull(user)) {
 			session.setAttribute("userSelected", user);
-			response.sendRedirect("modifyUser.jsp");
+			response.sendRedirect("pages/user.jsp");
 		} else {
 			response.sendRedirect("error.jsp");
 		}

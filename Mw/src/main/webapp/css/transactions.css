@@ -318,67 +318,183 @@ body.dark .home .text{
     color: var(--text-color);
 }
 
-/*--------------FINAL SIDEBAR-----------------------------*/
+/*-------------FINAL SIDEBAR--------------*/
 
-
-/*-------------  MAIN   -----------------------------*/
-#main_movi{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
-    padding: 6rem 10rem;
-    width: 100vw;
+#main_user{
+    padding: 8rem 10rem;
+    width: 93vw;
     position: absolute;
     top: 0;
     left: 13%;
-    height: 93vh;
+    height: 100vh;
     transition: var(--tran-05);
-    display: inline-block;
 }
 
-#main_movi h2{
-    position: relative;
-    left: 23rem;
-    margin-bottom: 20px;
+.sidebar.close ~ #main_user{
+    left: 2%;
+    height: 90vh;
 }
-
-.sidebar.close ~ #main_movi{
-    left: 6.8%;
-    height: 95vh;
-}
-
-.main_container{
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    width: 80%;
+.transactions{
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 2px solid #3a3b3c;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    width: 650px;
+    height: 550px;
+    background: var(--sidebar-color);
+    border-bottom: 10px solid var(--coolor-secundary);
+    border-radius: 6px;
+    transition: var(--tran-05);
+    transform: scale(.95);
 }
 
-.main_container > div{
-    display: inline-block;
+.transactions:hover{
+    transform: scale(1);
 }
 
-.date h3{
-    color: var(--coolor-secundary) ;
+body.dark .transactions{
+    color: var(--colo-text-button);
 }
 
-.money h3{
-    color: var(--color-base) ;
+.transactions .input-data{
+    height: 40px;
+    width: 100%;
+    position:relative;
+    top: 0;
+    margin-bottom: 6%;
+}
+.transactions .input-data input{
+    font-family: var(--font-SubTitle);
+    font-weight: 500;
+    height: 70%;
+    width: 70%;
+    border: none;
+    font-size: 0.8rem;
+    border-bottom: 2px solid var(--color-text);
+    outline: none;
+    background: transparent;
+}
+.input-data input:focus ~ label,
+.input-data input:valid ~ label{
+
+  transform: translateY(-1.1rem);
+  font-size: .85rem;
+  color: var(--text-color);
+
+}
+.transactions .input-data label{
+    font-family: var(--font-SubTitle);
+    font-size: .85rem;
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    color: var(--color-input);
+    pointer-events: none;
+    transition: all 0.3s ease;
+  
+}
+.input-data .underline{
+  position: absolute;
+  height: 2px;
+  width: 70%;
+  bottom: 12px;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: var(--coolor-secundary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before{
+  transform: scaleX(1);
 }
 
-.type h3{
-    color: #8C9DB4  ;
+.transactions form{
+    position: relative;
+    left: 15%;
+    bottom: -5%;
+    padding: 20px;
+    /*border: 1px solid tomato;*/
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline;
+    text-align: left;
 }
 
-.name h3{
-    color: #FFCF23;
+.btn{
+    left: 5%; 
+    background: none;
+    border:  2px solid var(--coolor-secundary);
+    border-radius: 6px;
+    font-family: var(--font-SubTitle);
+    font-weight: 600;
+    color: var( --coolor-secundary);
+    text-transform: uppercase;
+    padding: 5px 5px;
+    min-width: 100px;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
 }
 
-.cpf h3{
-    color: #D18A00;
+.btn:hover{
+    color: var(--colo-text-button);
 }
 
+.btn::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var( --coolor-secundary);
+    z-index: -1;
+    transition: transform 0.5s;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5, 1.6,0.4,0.7);
+}
+
+.btn::before{
+    transform:  scaleX(0);
+}
+.btn:hover::before{
+    transform: scaleX(1);
+}
+
+body.dark .btn{
+    color: var(--colo-text-button);
+}
+
+body.dark .btn:hover{
+    color: var(--colo-text-button);
+}
+
+select{
+    background: none;
+    color: var(--coolor-secundary);
+    padding: 5px;
+    border-radius: 6px;
+    border: 2px solid var(--coolor-secundary);
+}
+
+body.dark select{
+    color: var(--colo-text-button);
+}
+
+body.dark option{
+    color: var(--color-text);
+}
+body.dark .transactions .input-data input{
+    color: var(--colo-text-button);
+}

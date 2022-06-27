@@ -29,3 +29,11 @@ document.getElementById("registerW").onclick = function (){
         timer: 2000
     })
 };
+
+let editUser = document.getElementById("edit");
+let mod = document.querySelector(".modification");
+
+editUser.addEventListener('click', () => {
+     mod.style.visibility = 'visible';
+});
+
