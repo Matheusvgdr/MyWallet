@@ -51,11 +51,11 @@ public class LoginServlet extends HttpServlet {
 			
 			session.setAttribute("userSession", u);
 
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 			
 		} else {
 			
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("paserror.jsp");
 		}
 	}
 

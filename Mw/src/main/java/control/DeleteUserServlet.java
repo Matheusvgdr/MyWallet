@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.UserService;
 
-@WebServlet("/DeleteServlet")
+@WebServlet("/DeleteUserServlet")
 public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class DeleteUserServlet extends HttpServlet {
 		
 		if(service.delete(id)) {
 			
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/user.jsp");
 		}
 		
 	}

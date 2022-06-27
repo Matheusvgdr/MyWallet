@@ -37,9 +37,9 @@ public class MovimentationDAO {
 				mov.setMoney(rs.getDouble("money"));
 				mov.setMoviDate(rs.getString("moviDate"));
 				mov.setType(rs.getString("type"));
-				mov.getId_type().setId(rs.getInt("id_type"));;
+				mov.getId_type().setId(rs.getInt("id_type"));
+				;
 				mov.getId_user().setId(rs.getInt("id_user"));
-				
 
 			}
 
@@ -51,11 +51,12 @@ public class MovimentationDAO {
 		return mov;
 	}
 
+	// faz uma movimentação (Saque/Depósito)
 	public boolean insertMovimentation(Movimentation mov) {
 
 		boolean result = true;
 		int returnQuery;
-		
+
 		conex = DAO.createConnection();
 
 		String sql = "INSERT INTO tb_movimentation (moviDate, money, typeMovi, id_user, id_type) VALUES (?, ?, ?, ?,?);";
@@ -84,6 +85,7 @@ public class MovimentationDAO {
 
 	}
 
+	// Deleta uma movimentação de um usuário
 	public boolean deleteMovimentation(int id) {
 
 		boolean result = true;
@@ -114,6 +116,7 @@ public class MovimentationDAO {
 
 	}
 
+	// Lista todas as movimentações de um usuário
 	public List<Movimentation> listMov(int idUser) {
 
 		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
@@ -125,7 +128,7 @@ public class MovimentationDAO {
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
-			ps.setInt(1,idUser );
+			ps.setInt(1, idUser);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -133,8 +136,7 @@ public class MovimentationDAO {
 
 				mvt.setMoney(rs.getDouble("money"));
 				mvt.setMoviDate(rs.getString("moviDate"));
-				mvt.setType(rs.getString("typeMovi"));	
-			
+				mvt.setType(rs.getString("typeMovi"));
 
 				listOfMovimentation.add(mvt);
 
@@ -142,36 +144,102 @@ public class MovimentationDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-	return listOfMovimentation;
+
+		return listOfMovimentation;
 	}
-	
-	public Movimentation calcAll(int id) {
-	
-		Movimentation mov = null;
+
+	// Lista todos os depósitos de um usuário
+	public List<Movimentation> listDeposits(int idUser, int idType) {
+
+		List<Movimentation> listOfDeposits = new ArrayList<Movimentation>();
 		ResultSet rs = null;
+		Movimentation mvt = null;
 		conex = DAO.createConnection();
 
-		String sql = " SELECT SUM(money) FROM tb_movimentation WHERE id_type = ?;";
+		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, idUser);
+			ps.setInt(2, idType);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				mov = new Movimentation();
+				mvt = new Movimentation();
+
+				mvt.setMoney(rs.getDouble("money"));
+
+				listOfDeposits.add(mvt);
 
 			}
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
 
-		return mov;
+		return listOfDeposits;
 	}
 
+	//Lista todos os saques de um usuário
+	public List<Movimentation> listWithdraw(int idUser, int idType) {
 
+		List<Movimentation> listOfWithdraws = new ArrayList<Movimentation>();
+		ResultSet rs = null;
+		Movimentation mvt = null;
+		conex = DAO.createConnection();
+
+		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
+
+		try {
+			PreparedStatement ps = conex.prepareStatement(sql);
+			ps.setInt(1, idUser);
+			ps.setInt(2, idType);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				mvt = new Movimentation();
+
+				mvt.setMoney(rs.getDouble("money"));
+
+				listOfWithdraws.add(mvt);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listOfWithdraws;
+	}
+
+	public List<Movimentation> listAllMoney(int idUser, int idType) {
+
+		List<Movimentation> listOfWithdraws = new ArrayList<Movimentation>();
+		ResultSet rs = null;
+		Movimentation mvt = null;
+		conex = DAO.createConnection();
+
+		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
+
+		try {
+			PreparedStatement ps = conex.prepareStatement(sql);
+			ps.setInt(1, idUser);
+			ps.setInt(2, idType);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				mvt = new Movimentation();
+
+				mvt.setMoney(rs.getDouble("money"));
+
+				listOfWithdraws.add(mvt);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listOfWithdraws;
+	}
 }

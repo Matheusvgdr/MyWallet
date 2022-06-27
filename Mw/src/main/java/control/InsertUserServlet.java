@@ -12,7 +12,7 @@ import model.User;
 import service.UserService;
 
 
-@WebServlet("/InsertServlet")
+@WebServlet("/InsertUserServlet")
 public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class InsertUserServlet extends HttpServlet {
 		
 		
 		if(service.insert(us)) {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 		}
 	}
 

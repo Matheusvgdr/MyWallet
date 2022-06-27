@@ -23,11 +23,6 @@ public class MovimentationService {
 		return mvt.searchForId(id);
 	}
 	
-	public Movimentation calcDeposits(int idUser) {
-		
-		return mvt.calcAll(idUser);
-	}
-	
 	public List<Movimentation> listMov(int idUser){
 		return mvt.listMov(idUser);
 	}

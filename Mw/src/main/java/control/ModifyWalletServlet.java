@@ -35,7 +35,7 @@ public class ModifyWalletServlet extends HttpServlet {
 
 
 		if (service.modify(user)) {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 
 		}
 	}

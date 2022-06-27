@@ -36,7 +36,7 @@ public class InsertWalletServlet extends HttpServlet {
 		wallet.setId_user(u);
 		
 		if(service.insert(wallet)) {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 		}
 	}
 

@@ -50,7 +50,7 @@ public class DepositServlet extends HttpServlet {
 		HttpSession sessionM = request.getSession();
 		if(ms.insert(m)) {
 			sessionM.setAttribute("movimentation", m);
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("pages/home.jsp");
 			
 		}else {
 			response.sendRedirect("erro.html");

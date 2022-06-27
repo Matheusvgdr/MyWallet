@@ -43,7 +43,7 @@ public class PrepareMovimentationServlet extends HttpServlet {
 		
 		session.setAttribute("typeMovi", listOfTypes);
 		
-		response.sendRedirect("movimentatio.jsp");
+		response.sendRedirect("movimentation.jsp");
 		
 	}
 
