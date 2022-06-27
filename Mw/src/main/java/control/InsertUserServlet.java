@@ -38,9 +38,8 @@ public class InsertUserServlet extends HttpServlet {
 		us.setCpf(request.getParameter("cpf"));
 		
 		
-		
 		if(service.insert(us)) {
-			response.sendRedirect("pages/home.jsp");
+			response.sendRedirect("index.html");
 		}
 	}
 

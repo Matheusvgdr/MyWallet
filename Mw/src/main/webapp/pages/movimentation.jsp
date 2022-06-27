@@ -2,6 +2,7 @@
 <%@page import="model.User" %>
 <%@page import="model.TypeMov" %>
 <%@page import="dao.TypeMovDAO" %>
+<%@page import="dao.MovimentationDAO" %>
 <%@page import="model.Wallet" %>
 <%@page import="service.WalletService" %>
 <%@page import="service.MovimentationService" %>
@@ -175,7 +176,7 @@
 						
 	%>
 	
-	<form action="DepositServlet" method="post">
+	<form action="../DepositServlet" method="post">
 		<labe>Data</labe>
 		<input name="dateMovi" id="dateMovi" type="text"/>
 		
@@ -197,6 +198,7 @@
 		  
 		  
 		  <% }%>
+
 		  
 		</select>
 

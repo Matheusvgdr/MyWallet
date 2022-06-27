@@ -23,8 +23,8 @@
 </head>
 
 <body>
-
-	<%User us = (User)session.getAttribute("userSession"); %>
+<%User us = (User)session.getAttribute("userSession"); %>
+	<%Movimentation mv = (Movimentation)session.getAttribute("movimentation"); %>
 
     <nav class="sidebar close">
         <header>
@@ -112,41 +112,51 @@
     
 	<% MovimentationDAO mo = new MovimentationDAO();
 	List<Movimentation> lis = new ArrayList<Movimentation>();
-	double calc = 0;
+	double calcD = 0;
 	lis = mo.listDeposits(us.getId(), 1);
 	
 	for(Movimentation i: lis){
 	
-		calc += i.getMoney();
+		calcD += i.getMoney();
 		
 	}
 	
-	%>
-	
-	<h1>Todos depositos: </h1>
-	
-	
-		<% MovimentationDAO movime = new MovimentationDAO();
 	List<Movimentation> listaW = new ArrayList<Movimentation>();
 	double calcW = 0;
-	lis = movime.listWithdraw(us.getId(), 2);
+	lis = mo.listWithdraw(us.getId(), 2);
 	
 	for(Movimentation i: lis){
 	
 		calcW += i.getMoney();
 		
 	}
-	%>
-	<h1>Todos saques:</h1>
 	
-	<h1>Todos dinheiro: </h1>
+	double totalMoney = calcD - calcW;
+	%>
+	
+	<h1>Todos depositos: </h1>
+	
+
+
     <section id="main">
 
         <div class="withdraw">
 
             <div class="main_container">
                 <h2> Day's Withdraw </h2>
+                <%
+                double operation;
+                if(calcD - calcW < 0){ 
+                	
+                operation = calcW - mv.getMoney();%>
+                
+                <span>R$  <%=operation %></span>
+                
+                <% } else{%>
+                
                 <span>R$  <%=calcW %></span>
+                
+                <%} %>
             </div>
             <img src="../imgs/money_down.svg" alt="">
 
@@ -162,7 +172,7 @@
         <div class="deposit">
             <div class="main_container">
                 <h2>Day's deposit</h2>
-                <span>R$ <%=calc %></span>
+                <span>R$ <%=calcD %></span>
             </div>
             <img src="../imgs/money_up.svg" alt="">
         </div>
@@ -170,7 +180,20 @@
         <div class="money">
             <div class="main_container">
                 <h2>Money </h2>
-                <span>R$ <%=calc - calcW %></span>
+                
+                	<% 
+                	if(calcW > calcD){
+                		
+                	%>
+                		
+						<span>Não é possivel realizar o saque</span>
+						
+					<% } else{%>
+					
+                <span>R$ <%=totalMoney %></span>
+                
+              	     <% } %>
+                
             </div>
             <img src="../imgs/money.svg" alt="">
         </div>
