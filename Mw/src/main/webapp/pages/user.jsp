@@ -23,7 +23,23 @@
 
     <script>
         function confirmDeleteUser(id){
-            var answer = confirm("Confirma a exclusão do registro?");
+            var answer = Swal.fire({
+            	  title: 'Are you sure?',
+            	  text: "You won't be able to revert this!",
+            	  icon: 'warning',
+            	  showCancelButton: true,
+            	  confirmButtonColor: '#3085d6',
+            	  cancelButtonColor: '#d33',
+            	  confirmButtonText: 'Yes, delete it!'
+            	}).then((result) => {
+            	  if (result.isConfirmed) {
+            	    Swal.fire(
+            	      'Deleted!',
+            	      'Your file has been deleted.',
+            	      'success'
+            	    )
+            	  }
+            	});
             
             if(answer == true){
                 window.location.href = "../DeleteUserServlet?id=" + id;
@@ -57,7 +73,7 @@
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="wallet.html">
+                        <a href="transactionsWallet.jsp">
                             <i class='bx bx-plus-circle icon'></i>
                             <span id="registerW" class="text nav-text">Register wallet</span>
                         </a>
@@ -79,19 +95,13 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
                             <span class="text nav-text">Withdraw money</span>
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Deposit</span>
-                        </a>
-                    </li>
-
+         
                     <li class="nav-link">
                         <a href="wallet.jsp">
                             <i class='bx bx-wallet icon'></i>

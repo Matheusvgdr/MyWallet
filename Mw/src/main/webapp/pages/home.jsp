@@ -48,7 +48,7 @@
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="transactionsWallet.jsp">
                             <i class='bx bx-plus-circle icon'></i>
                             <span id = "registerW" class="text nav-text">Register wallet</span>
                         </a>
@@ -63,18 +63,12 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
-                            <span class="text nav-text">Withdraw money</span>
+                            <span class="text nav-text">Transactions</span>
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Deposit</span>
-                        </a>
-                    </li>
 
                     <li class="nav-link">
                         <a href="wallet.jsp">
@@ -88,7 +82,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="../LogoutServlet">
                         <i id="logOut" class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>

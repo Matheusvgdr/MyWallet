@@ -1,5 +1,7 @@
+
 <%@page import="service.UserService" %>
 <%@page import="model.User" %>
+<%@page import="model.TypeMov" %>
 <%@page import="model.Wallet" %>
 <%@page import="service.WalletService" %>
 <%@page import="service.MovimentationService" %>
@@ -7,12 +9,7 @@
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="dao.MovimentationDAO" %>
-<!-------------------USUARIO LOGADO------------------------------>
-
-<%User us = (User)session.getAttribute("userSession"); %>
-
-<!--------------------------------------------------------------->
-
+<%@page import="dao.TypeMovDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,26 +17,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallets</title>
-    <link rel="stylesheet" href="../css/wallet.css">
+    <title>Modification Wallet</title>
+    <link rel="stylesheet" href="../css/transactionW.css">
+
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <script>
-        function confirmDeleteWallet(id){
-            var answer = confirm("Confirma a exclusão do registro?");
-            
-            if(answer == true){
-                window.location.href = "../DeleteWalletServlet?id=" + id;
-            }
-        }
-        </script>
-    
 </head>
 
 <body>
-    
 
+ <!-------------------USUARIO LOGADO------------------------------>
+
+       <%User us = (User)session.getAttribute("userSession"); %>
+
+       <!--------------------------------------------------------------->
 
     <nav class="sidebar close">
         <header>
@@ -63,8 +55,7 @@
                             <span id="registerW" class="text nav-text">Register wallet</span>
                         </a>
                     </li>
-                    
-                     <li class="nav-link">
+                    <li class="nav-link">
                         <a href="home.jsp">
                             <i class='bx bx-home icon'></i>
 
@@ -81,7 +72,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="transaction.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
                             <span class="text nav-text">Transactions</span>
                         </a>
@@ -126,38 +117,90 @@
         <div class="text">Your wallets</div>
     </section>
 
-
+    
+    
     <section id="main_wallet">
 
-        <% WalletService serviceW = new WalletService();
-        List<Wallet> listW = new ArrayList<Wallet>();
-     
-       listW = serviceW.listWallet(us.getId());
-     
-       for(Wallet w: listW){%>
-
-        <div class="wallet">
-            <img src="../imgs/Wallet_brown.svg" alt="">
+        <div class="wallet" id="new">
+            <img src="../imgs/moneyGreen.svg" alt="">
             <div class="main_container">
+                <h2>New Wallet</h2>
+                <form action="../InsertWalletServlet" method="post">
+                   
+                <div class="input-data">
 
-                <h2><%=w.getNameWallet()%></h2>
-                <span>R$ <%=w.getBudget() %></span>
+                    <input type="text" name="nameWlt" id="nameWlt" autocomplete="off" required>
+                    <div class="underline"></div>
 
+                    <label>Name</label>
 
-            </div>
+                </div>
 
-            <div class="container_icons">
-                <a href="../PrepareModificationWalletServlet?id=<%=w.getId()%>"><i class='bx bx-edit icon '></i></a>
-                <a href="#" onclick="confirmDeleteWallet(<%=w.getId()%>)"><i class='bx bx-x-circle icon '></i></a>
-                <a href=""><i class='bx bx-wallet-alt icon '></i></a>
+                <div class="input-data">
+
+                    <input type="text" name="value" id="value" autocomplete="off" required>
+                    <div class="underline"></div>
+
+                    <label>Money</label>
+
+                </div> 
+                <input type="hidden" name="idUs" id="idUs" value="<%=us.getId() %>" autocomplete="off" required>
+
+                <button class="btn">Enter</button>
+					
+				
+                </form>
+                   
             </div>
 
         </div>
 
+        
+        <div class="wallet" id="transac">
+            <img src="../imgs/Gold coins.svg" alt="">
+            
+            <div class="main_container">
+                <h2>To Deposit or withdraw your money</h2>
+                <form action="" method="post">
+                   
+                <div class="input-data">
 
-        <%
-		}
-		%>
+                    <input type="text" name="personName" id="personName" autocomplete="off" required>
+                    <div class="underline"></div>
+
+                    <label>Money</label>
+
+                </div>
+				<% 
+                List<TypeMov> list;
+                list = (ArrayList<TypeMov>)session.getAttribute("typeMovi");
+                TypeMovDAO t = new TypeMovDAO();
+                
+                list = t.listar();
+                                    
+                %>
+               <select name="idType" id="idType">
+                
+                    <option value="0" ><strong>Select...</strong></option>
+                    
+                    <% for(TypeMov tp: list){%>
+                    
+                      <option value="<%=tp.getId() %>"><strong><%=tp.getDescription() %></strong></option>
+                      
+                      
+                      <% }%>
+            
+                      
+                </select>
+
+                <button class="btn">Enter</button>
+
+                </form>
+                
+            </div>
+
+        </div>
+        
         
     </section>
 

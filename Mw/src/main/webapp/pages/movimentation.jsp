@@ -21,17 +21,17 @@
 </head>
 <body>
 
-    <!-------------------USUARIO LOGADO------------------------------>
+ <!-------------------USUARIO LOGADO------------------------------>
 
-    <%User us = (User)session.getAttribute("userSession"); %>
+       <%User us = (User)session.getAttribute("userSession"); %>
 
-    <!--------------------------------------------------------------->
+       <!--------------------------------------------------------------->
     <nav class="sidebar close">
         <header>
             <li class="nav-link">
                 <a href="user.jsp">
                     <i class='bx bx-user icon'></i>
-                    <span class="text nav-text"><%=us.getUserName() %></span>
+                    <span class="text nav-text">><%=us.getUserName() %></span>
                 </a>
             </li>
             <i class='bx bx-chevron-right toggle'></i>
@@ -43,12 +43,13 @@
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="transactionsWallet.jsp">
                             <i class='bx bx-plus-circle icon'></i>
                             <span id="registerW" class="text nav-text">Register wallet</span>
                         </a>
                     </li>
-                     <li class="nav-link">
+
+                    <li class="nav-link">
                         <a href="home.jsp">
                             <i class='bx bx-home icon'></i>
 
@@ -65,18 +66,12 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
-                            <span class="text nav-text">Withdraw money</span>
+                            <span class="text nav-text">Transactions</span>
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Deposit</span>
-                        </a>
-                    </li>
 
                     <li class="nav-link">
                         <a href="wallet.jsp">
@@ -90,7 +85,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="../LogoutServlet">
                         <i id="logOut" class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -118,44 +113,44 @@
 
     <section id="main_movi">
 
-        <h2>Account Statement</h2>
- <%
+        <h2>Account Statement</h2>,
+        
+         	<%
 			MovimentationService serviceM = new MovimentationService();
 			List<Movimentation> listM = new ArrayList<Movimentation>();
 			
 			listM = serviceM.listMov(us.getId());
 			
-			for(Movimentation mv: listM){%>
+			for(Movimentation mv: listM){
+			
+			%>
+
         <div class="main_container">
-           
 
             <div class="date">
                 <h3>Date</h3>
-                <span><%=mv.getMoviDate()%></span>
+                <span><%=mv.getMoviDate() %> </span>
             </div>
             <div class="money">
                 <h3>Money</h3>
-                <span>RS <%=mv.getMoney() %></span>
+                <span><%=mv.getMoney() %> </span>
             </div>
             <div class="type">
                 <h3>Movimentation's type</h3>
-                <span><%=mv.getId_type().getDescription() %></span>
+                <span><%=mv.getId_type().getDescription() %> </span>
             </div>
             <div class="name">
                 <h3>Name</h3>
-                <span><%=us.getPersonName() %></span>
+                <span><%=mv.getId_user().getPersonName() %> </span>
             </div>
-            <div class="cpf">
-                <h3>CPF</h3>
-                <span><%=us.getCpf() %></span>
-            </div>
-          
+            
         </div>
         
-          <%
-			}
-			%>
+         <%
+		  }
+		 %>
 
+       
     </section>
 
     

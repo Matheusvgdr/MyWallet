@@ -2,13 +2,13 @@
 <%@page import="model.User" %>
 <%@page import="model.Wallet" %>
 <%@page import="model.TypeMov" %>
-<%@page import="dao.TypeMovDAO" %>
 <%@page import="service.WalletService" %>
 <%@page import="service.MovimentationService" %>
 <%@page import="model.Movimentation" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="dao.MovimentationDAO" %>
+<%@page import="dao.TypeMovDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +30,6 @@
 
        <%User us = (User)session.getAttribute("userSession"); %>
 
-
        <!--------------------------------------------------------------->
        
     <nav class="sidebar close">
@@ -50,12 +49,12 @@
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="wallet.html">
+                        <a href="transactionsWallet.jsp">
                             <i class='bx bx-plus-circle icon'></i>
                             <span id="registerW" class="text nav-text">Register wallet</span>
                         </a>
                     </li>
-                     <li class="nav-link">
+                    <li class="nav-link">
                         <a href="home.jsp">
                             <i class='bx bx-home icon'></i>
 
@@ -64,7 +63,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="movimentation.jsp">
+                        <a href="movimentation.html">
                             <i class='bx bx-receipt icon'></i>
 
                             <span class="text nav-text">Movimentation</span>
@@ -72,18 +71,12 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
-                            <span class="text nav-text">Withdraw money</span>
+                            <span class="text nav-text">Transactions</span>
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Deposit</span>
-                        </a>
-                    </li>
 
                     <li class="nav-link">
                         <a href="wallet.jsp">
@@ -97,7 +90,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="../index.html">
+                    <a href="../LogoutServlet">
                         <i id="logOut" class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -128,16 +121,6 @@
     <section id="main_user">
       
         <div class="transactions">
-        
-                <% 
-                List<TypeMov> list;
-                list = (ArrayList<TypeMov>)session.getAttribute("typeMovi");
-                TypeMovDAO t = new TypeMovDAO();
-                
-                list = t.listar();
-                                    
-                %>
-        
             <h2>Deposit or withdraw your money</h2>
             <form action="../TransactionsServlet" method="post">
                 <input type="hidden" name="idUs" id="idUs" value="<%=us.getId() %>">
@@ -145,6 +128,7 @@
                 <div class="input-data">
 
                     <input type="date" name="dateMovi" id="dateMovi" autocomplete="off" required>
+                    <div class="underline"></div>
 
 
                 </div>
@@ -158,24 +142,16 @@
 
                 </div>
 
-                <div class="input-data">
-
-                    <input type="hidden" name="type" id="type" value="0" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Type</label>
-
-                </div>
-
-                <div class="input-data">
-
-                    <input type="hidden" name="userPassword" id="userPassword" autocomplete="off" required>
-                    <div class="underline"></div>
-
-
-                </div>
-
+				<% 
+                List<TypeMov> list;
+                list = (ArrayList<TypeMov>)session.getAttribute("typeMovi");
+                TypeMovDAO t = new TypeMovDAO();
                 
+                list = t.listar();
+                                    
+                %>
+                
+                 
                 <select name="idType" id="idType">
                 
                     <option value="0" ><strong>Select...</strong></option>
@@ -190,7 +166,19 @@
                       
                 </select>
 
-                <button class="btn">Enter</button>
+
+                    <button class="btn">Enter</button>
+
+                    
+                    <div class="input-data">
+
+                        <input type="hidden" name="type" id="type" value="teste" autocomplete="off" required>
+                        <div class="underline"></div>
+    
+    
+                    </div>
+
+                
 
             </form>
             

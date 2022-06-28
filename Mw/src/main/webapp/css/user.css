@@ -336,7 +336,6 @@ body.dark .home .text{
     height: 90vh;
 }
 .modification{
-    visibility: visible;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -48,12 +48,12 @@
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="transactionsWallet.jsp">
                             <i class='bx bx-plus-circle icon'></i>
                             <span id="registerW" class="text nav-text">Register wallet</span>
                         </a>
                     </li>
-                     <li class="nav-link">
+                    <li class="nav-link">
                         <a href="home.jsp">
                             <i class='bx bx-home icon'></i>
 
@@ -70,18 +70,13 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
-                            <span class="text nav-text">Withdraw money</span>
+                            <span class="text nav-text">Transactions</span>
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="TransactionsWallet.jsp">
-                            <i class='bx bx-money icon'></i>
-                            <span class="text nav-text">Deposit</span>
-                        </a>
-                    </li>
+             
 
                     <li class="nav-link">
                         <a href="wallet.jsp">
@@ -95,7 +90,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="../LogoutServlet">
                         <i id="logOut" class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -125,55 +120,23 @@
     
     <section id="main_wallet">
 
-        <div class="wallet" id="new">
-            <img src="../imgs/moneyGreen.svg" alt="">
-            <div class="main_container">
-                <h2>New Wallet</h2>
-                <form action="" method="post">
-                   
-                <div class="input-data">
-
-                    <input type="text" name="personName" id="personName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Name</label>
-
-                </div>
-
-                <div class="input-data">
-
-                    <input type="text" name="userName" id="userName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Money</label>
-
-                </div>
-
-                    <button class="btn"><i class='bx bx-right-arrow-circle icon moon'></i></button>
-
-                </form>
-                
-            </div>
-
-        </div>
-
 
         <div class="wallet" id="new">
-            <img src="../imgs/moneyGreen.svg" alt="">
+            <img src="../imgs/Iron Safe.svg" alt="">
             <div class="main_container">
                 <h2>Change Wallet</h2>
                 <form action="../ModifyWalletServlet" method="post">
                    
                 <div class="input-data">
                     <input type="hidden" value="<%=w.getId() %>" name="id" id="id">
-                    <input type="text" value="<%=w.getNameWallet()%>" name="nameWallet" id="nameWallet" autocomplete="off" required>
+                    <input type="text" value="<%=w.getNameWallet() %>" name="nameWallet" id="nameWallet" autocomplete="off" required>
                     <div class="underline"></div>
 
-                    <label>Name</label>
+                    <label>Name wallet</label>
 
                 </div>
 
-                    <button class="btn"><i class='bx bx-right-arrow-circle icon moon'></i></button>
+                    <button class="btn">Change</button>
 
                 </form>
                 
@@ -182,52 +145,7 @@
         </div>
 
         
-        <div class="wallet" id="new">
-            <img src="../imgs/wallet_up.svg" alt="">
-            <div class="main_container">
-                <h2>Deposit Money</h2>
-                <form action="" method="post">
-                   
-                <div class="input-data">
-
-                    <input type="text" name="personName" id="personName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Name</label>
-
-                </div>
-
-                    <button class="btn"><i class='bx bx-right-arrow-circle icon moon'></i></button>
-
-                </form>
-                
-            </div>
-
-        </div>
-
-        <div class="wallet" id="new">
-            <img src="../imgs/wallet_down.svg" alt="">
-            <div class="main_container">
-                <h2>Withdraw Money</h2>
-                <form action="" method="post">
-                   
-                <div class="input-data">
-
-                    <input type="text" name="personName" id="personName" autocomplete="off" required>
-                    <div class="underline"></div>
-
-                    <label>Name</label>
-
-                </div>
-
-                    <button class="btn"><i class='bx bx-right-arrow-circle icon moon'></i></button>
-
-                </form>
-                
-            </div>
-
-        </div>
-        
+      
         
     </section>
 

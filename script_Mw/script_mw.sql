@@ -1,0 +1,121 @@
+CREATE DATABASE db_myWallet;
+
+use db_myWallet;
+
+-- TABELAS ----------------------------------------------
+CREATE TABLE tb_users(
+id int primary key auto_increment,
+personName varchar(250),
+userName varchar(250) NOT NULL,
+cpf varchar(250) NOT NULL,
+userPassword varchar(250) NOT NULL
+);
+
+CREATE TABLE tb_wallet(
+id int primary key auto_increment,
+nameWallet varchar(80) NOT NULL,
+budget double NOT NULL,
+id_user int
+);
+
+CREATE TABLE tb_movimentation(
+id int primary key auto_increment,
+moviDate varchar(50),
+money double NOT NULL,
+typeMovi varchar(100) NOT NULL,
+id_user int ,
+id_type int ,
+id_wallet int
+);
+
+CREATE TABLE tb_typeMovi(
+id int primary key auto_increment,
+description varchar(100)
+);
+
+-- PARA ALTERAR AS TABELAS ------------------------------
+
+ALTER TABLE tb_wallet ADD COLUMN id_user INTEGER;
+ALTER TABLE tb_movimentation ADD COLUMN id_user INTEGER;
+ALTER TABLE tb_movimentation ADD COLUMN id_type INTEGER;
+ALTER TABLE tb_movimentation ADD COLUMN id_wallet INTEGER;
+
+-- FAZER A CONEXÃO DAS CHAVES ESTRANGEIRAS COM A TB_MOVIMENTATION -------------------------------------------------------
+
+ALTER TABLE tb_movimentation ADD CONSTRAINT fk_user FOREIGN KEY(id_user) REFERENCES tb_users(id) ON DELETE CASCADE;
+ALTER TABLE tb_movimentation ADD CONSTRAINT fk_us FOREIGN KEY(id_type) REFERENCES tb_typeMovi(id)  ON DELETE CASCADE;
+ALTER TABLE tb_movimentation ADD CONSTRAINT fk_w FOREIGN KEY(id_wallet) REFERENCES tb_wallet(id)  ON DELETE CASCADE;
+
+-- FAZER A CONEXÃO DAS CHAVES ESTRANGEIRAS COM A TB_WALLET -------------------------------------------------------
+ALTER TABLE tb_wallet ADD CONSTRAINT fk_userW FOREIGN KEY(id_user) REFERENCES tb_users(id)  ON DELETE CASCADE;
+
+-- INSERT TYPEMOVI ------------------------------------------------------
+
+INSERT INTO tb_typeMovi (description) VALUES("Deposito");
+INSERT INTO tb_typeMovi (description) VALUES("Saque");
+
+-- INSERTS USERS -----------------------------------------------
+
+INSERT INTO tb_users( personName, userName, cpf, userPassword)
+VALUES ( "Matheus", "Maths", "125.425.425-51", "12345");
+
+INSERT INTO tb_users( personName, userName, cpf, userPassword)
+VALUES ( "Sarah", "sa", "125.425.425-51", "12345");
+
+INSERT INTO tb_users( personName, userName, cpf, userPassword)
+VALUES ( "Julio", "ju", "125.425.425-51", "12345");
+
+INSERT INTO tb_users( personName, userName, cpf, userPassword)
+VALUES ( "Maria", "maria", "125.425.425-51", "12345");
+
+-- INSERT WALLETS ------------------------------------------------------
+
+INSERT INTO tb_wallet(nameWallet, budget, id_user) VALUES ("carteira2", 51, 4);
+INSERT INTO tb_wallet(nameWallet, budget, id_user) VALUES ("casa", 180, 2);
+INSERT INTO tb_wallet(nameWallet, budget, id_user) VALUES ("carteira1", 100, 3);
+INSERT INTO tb_wallet(nameWallet, budget, id_user) VALUES ("carteira1", 100, 3);
+
+-- INSERTS MOVIMENTATION ------------------------------------------
+
+INSERT INTO tb_movimentation (moviDate, money,  typeMovi, id_user, id_type, id_wallet) VALUES ("20.05.2022", 635,  "deposito", 1, 1,1);
+INSERT INTO tb_movimentation (moviDate, money,  typeMovi, id_user, id_type, id_wallet) VALUES ("20.05.2022", 78, "deposito", 2, 2,2);
+INSERT INTO tb_movimentation (moviDate, money,  typeMovi, id_user, id_type, id_wallet) VALUES ("20.05.2022", 45,  "deposito", 3, 2,3);
+INSERT INTO tb_movimentation (moviDate, money,  typeMovi, id_user, id_type, id_wallet) VALUES ("20.05.2022", 10,  "deposito", 4, 1,4);
+
+-- SELECT DE TODAS AS TABELAS -----------------------------------------------------------------------
+
+SELECT * FROM tb_users;
+SELECT * FROM tb_wallet;
+SELECT * FROM tb_typeMovi;
+SELECT * FROM tb_movimentation;
+
+
+-- SELECT COM O USO DAS CHAVES ESTRÂNGEIRAS TB_MOVIMENTATION -------------------------------------------------------------------
+
+SELECT M.money , U.userName, T.description FROM tb_movimentation M INNER JOIN tb_users U ON U.id = M.id_user
+																   INNER JOIN tb_typeMovi T ON T.id = M.id_type 
+                                                                   WHERE T.id = 4;
+                                                                   
+SELECT M.money, M.moviDate, U.personName, T.description FROM tb_movimentation M INNER JOIN tb_users U ON U.id = M.id_user 
+																			 INNER JOIN tb_typeMovi T ON T.id = M.id_type 
+                                                                             WHERE id_user = 4;
+ 
+-- CALCULOS TB_MOVIMENTATION -------------------------------------------------------------------------------
+ 
+SELECT SUM(money) FROM tb_movimentation WHERE id_type = 1 AND id_user = 3 ;
+
+SELECT money FROM tb_movimentation WHERE id_user = 3;
+
+SELECT SUM(money) FROM tb_movimentation WHERE id_type = 2;
+
+
+ -- DELETE DE TODOS OS ELEMENTOS DO BANCO DE DADOS ----------------------------------
+ 
+DROP DATABASE db_mywallet;
+DROP TABLE tb_users;
+DROP TABLE tb_wallet;
+DROP TABLE tb_movimentation;
+DROP TABLE tb_typeMovi;
+DROP TABLE tb_wallet;
+ 
+

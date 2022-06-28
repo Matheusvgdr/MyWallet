@@ -420,7 +420,7 @@ body.dark .transactions{
 .transactions form{
     position: relative;
     left: 15%;
-    bottom: -5%;
+    bottom: -12%;
     padding: 20px;
     /*border: 1px solid tomato;*/
     width: 100%;
@@ -481,7 +481,9 @@ body.dark .btn:hover{
 }
 
 select{
+    position: relative;
     background: none;
+    width: 200px;
     color: var(--coolor-secundary);
     padding: 5px;
     border-radius: 6px;
