@@ -7,9 +7,12 @@
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="dao.MovimentationDAO" %>
+<%@page import="java.util.Objects" %>
 <!-------------------USUARIO LOGADO------------------------------>
 
-<%User us = (User)session.getAttribute("userSession"); %>
+<%
+User us = (User) session.getAttribute("userSession");
+%>
 
 <!--------------------------------------------------------------->
 
@@ -38,7 +41,7 @@
 </head>
 
 <body>
-    
+     <% if(!Objects.isNull(us)){%>
 
 
     <nav class="sidebar close">
@@ -81,7 +84,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="transaction.jsp">
+                        <a href="transactions.jsp">
                             <i class='bx bx-money-withdraw icon'></i>
                             <span class="text nav-text">Transactions</span>
                         </a>
@@ -166,6 +169,11 @@
     <!-- ----------SCRIPT ------------- -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/home.js"></script>
+      <%} else{
+    	
+    	response.sendRedirect("error.html");%>
+ 
+    	<% } %>
 </body>
 
 </html>

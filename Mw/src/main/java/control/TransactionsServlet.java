@@ -54,7 +54,7 @@ public class TransactionsServlet extends HttpServlet {
 			response.sendRedirect("pages/home.jsp");
 			
 		}else {
-			response.sendRedirect("pages/erro.html");
+			response.sendRedirect("pages/error.html");
 		}
 		
 		
