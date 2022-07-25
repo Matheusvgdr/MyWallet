@@ -36,6 +36,7 @@ public class DeleteUserServlet extends HttpServlet {
 			response.sendRedirect("index.html");
 		}
 		
+		//teste
 	}
 
 }
