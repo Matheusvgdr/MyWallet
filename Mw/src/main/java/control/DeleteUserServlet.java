@@ -36,7 +36,7 @@ public class DeleteUserServlet extends HttpServlet {
 			response.sendRedirect("index.html");
 		}
 		
-		//teste
+		//teste vinicius para math
 	}
 
 }
