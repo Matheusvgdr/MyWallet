@@ -11,7 +11,16 @@ toggle.addEventListener("click", () => {
 })
 
 modeSwitch.addEventListener("click", () => {
-    body.classList.toggle("dark");
+
+    if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        localStorage.setItem("theme", "light");
+       
+      } else {
+        body.classList.add('dark');
+        localStorage.setItem("theme", "dark");
+       
+      }
 
     if (body.classList.contains("dark")) {
         modeText.innerText = "Light mode";
@@ -20,6 +29,12 @@ modeSwitch.addEventListener("click", () => {
 
     }
 });
+
+if (localStorage.getItem("theme") === "dark") {
+    body.classList.add('dark');
+  }
+
+
 
 let editUser = document.getElementById("edit");
 let mod = document.querySelector(".modification");
