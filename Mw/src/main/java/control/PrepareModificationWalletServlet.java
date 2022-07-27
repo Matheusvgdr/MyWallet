@@ -15,18 +15,15 @@ import service.WalletService;
 
 @WebServlet("/PrepareModificationWalletServlet")
 public class PrepareModificationWalletServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 1L;     
 
     public PrepareModificationWalletServlet() {
-        super();
-     
+        super();    
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -51,8 +48,6 @@ public class PrepareModificationWalletServlet extends HttpServlet {
 			
 		} else {
 			response.sendRedirect("error.jsp");
-		}
-	
+		}	
 	}
-
 }

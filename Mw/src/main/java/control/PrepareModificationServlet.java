@@ -13,19 +13,14 @@ import javax.servlet.http.HttpSession;
 import model.User;
 import service.UserService;
 
-
 @WebServlet("/PrepareModificationServlet")
 public class PrepareModificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
- 
     public PrepareModificationServlet() {
         super();
-
-    }
-    
+    }  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doPost(request, response);
 	}
 
@@ -45,9 +40,6 @@ public class PrepareModificationServlet extends HttpServlet {
 			response.sendRedirect("pages/user.jsp");
 		} else {
 			response.sendRedirect("error.jsp");
-		}
-		
-		
+		}		
 	}
-
 }

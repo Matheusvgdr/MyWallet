@@ -11,5 +11,4 @@ public class TypeMovService {
 	public List<TypeMov> listar() {
 		return dao.listar();
 	}
-
 }

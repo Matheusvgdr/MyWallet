@@ -15,12 +15,10 @@ public class ModifyUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public ModifyUserServlet() {
-        super();
-       
+        super();       
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		doPost(request,response);
 	}
 
@@ -36,7 +34,6 @@ public class ModifyUserServlet extends HttpServlet {
 		
 		if(service.modify(user)) {
 			response.sendRedirect("pages/user.jsp");
-	}
-
+		}
 	}
 }

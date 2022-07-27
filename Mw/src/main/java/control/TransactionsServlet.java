@@ -23,11 +23,9 @@ public class TransactionsServlet extends HttpServlet {
 
     public TransactionsServlet() {
         super();
-   
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doPost(request, response);
 	}
 
@@ -56,10 +54,5 @@ public class TransactionsServlet extends HttpServlet {
 		}else {
 			response.sendRedirect("pages/error.html");
 		}
-		
-		
-		
-
 	}
-
 }

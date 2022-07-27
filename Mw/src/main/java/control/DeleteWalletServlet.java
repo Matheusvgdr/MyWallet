@@ -35,5 +35,4 @@ public class DeleteWalletServlet extends HttpServlet {
 			response.sendRedirect("pages/wallet.jsp");
 		}
 	}
-
 }

@@ -16,7 +16,6 @@ public class ModifyWalletServlet extends HttpServlet {
 
 	public ModifyWalletServlet() {
 		super();
-
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +35,6 @@ public class ModifyWalletServlet extends HttpServlet {
 
 		if (service.modify(user)) {
 			response.sendRedirect("pages/wallet.jsp");
-
 		}
 	}
 }

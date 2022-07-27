@@ -70,6 +70,5 @@ public class TypeMovDAO {
 		}
 
 		return result;
-		
 	}
 }

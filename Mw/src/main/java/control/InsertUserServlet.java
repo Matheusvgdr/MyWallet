@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import model.User;
 import service.UserService;
 
-
 @WebServlet("/InsertUserServlet")
 public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,5 +41,4 @@ public class InsertUserServlet extends HttpServlet {
 			response.sendRedirect("index.html");
 		}
 	}
-
 }

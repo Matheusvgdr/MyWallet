@@ -13,27 +13,20 @@ import javax.servlet.http.HttpSession;
 import model.User;
 import service.UserService;
 
-
 @WebServlet("/PrepareIdUserForWalletServlet")
 public class PrepareIdUserForWalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
     public PrepareIdUserForWalletServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		doPost(request, response);
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
 		UserService service = new UserService();
 		
 		User usr = new User();
@@ -42,8 +35,7 @@ public class PrepareIdUserForWalletServlet extends HttpServlet {
 		String idRequest = request.getParameter("id");
 		 
 		usr = service.searchForId(Integer.parseInt(idRequest));
-		
-		
+				
 		if(!Objects.isNull(usr)) {
 			session.setAttribute("userSelected", usr);
 			response.sendRedirect("modifyWallet.jsp");
@@ -51,5 +43,4 @@ public class PrepareIdUserForWalletServlet extends HttpServlet {
 			response.sendRedirect("error.jsp");
 		}
 	}
-
 }

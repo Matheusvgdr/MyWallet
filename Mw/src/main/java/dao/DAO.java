@@ -30,7 +30,6 @@ public class DAO {
 				e.printStackTrace();
 			}
 			
-			return conex;
-			
+			return conex;	
 		}
 }

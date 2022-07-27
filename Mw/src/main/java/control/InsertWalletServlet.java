@@ -17,7 +17,6 @@ public class InsertWalletServlet extends HttpServlet {
        
     public InsertWalletServlet() {
         super();
-       
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,5 +38,4 @@ public class InsertWalletServlet extends HttpServlet {
 			response.sendRedirect("pages/transactionsWallet.jsp");
 		}
 	}
-
 }

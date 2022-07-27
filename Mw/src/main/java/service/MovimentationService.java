@@ -1,5 +1,4 @@
 package service;
-
 import java.util.List;
 
 import dao.MovimentationDAO;
@@ -10,8 +9,8 @@ public class MovimentationService {
 
 	public boolean insert(Movimentation mov) {
 		boolean insertValido = true;
-		
-		if(mvt.verificar(mov)) {
+
+		if (mvt.verificar(mov)) {
 			insertValido = mvt.insertMovimentation(mov);
 		} else {
 			insertValido = false;
@@ -28,9 +27,8 @@ public class MovimentationService {
 
 		return mvt.searchForId(id);
 	}
-	
-	public List<Movimentation> listMov(int idUser){
+
+	public List<Movimentation> listMov(int idUser) {
 		return mvt.listMov(idUser);
 	}
-	
 }

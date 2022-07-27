@@ -14,23 +14,18 @@ import dao.UserDAO;
 import model.TypeMov;
 import model.User;
 
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public LoginServlet() {
-        super();
-   
+        super();   
     }
-
-	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doPost(request, response);
-		
+		doPost(request, response);		
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -58,5 +53,4 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("pages/error.html");
 		}
 	}
-
 }
