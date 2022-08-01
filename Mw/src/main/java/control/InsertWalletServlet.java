@@ -31,7 +31,6 @@ public class InsertWalletServlet extends HttpServlet {
 		u.setId(Integer.parseInt(request.getParameter("idUs")));
 		
 		wallet.setNameWallet(request.getParameter("nameWlt"));
-		wallet.setBudget(Integer.parseInt(request.getParameter("value")));
 		wallet.setId_user(u);
 		
 		if(service.insert(wallet)) {

@@ -4,9 +4,11 @@
 <%@page import="service.WalletService"%>
 <%@page import="service.MovimentationService"%>
 <%@page import="model.Movimentation"%>
+<%@page import="model.MoviWallet"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.MovimentationDAO"%>
+<%@page import="dao.MoviWalletDAO"%>
 <%@page import="java.util.Objects"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,6 +127,40 @@
 			<div class="name">
 				<h3>Name</h3>
 				<span><%=mv.getId_user().getPersonName()%> </span>
+			</div>
+
+		</div>
+
+		<%
+		}
+		%>
+		
+		<%
+		MoviWalletDAO daoW = new MoviWalletDAO();
+		List<MoviWallet> listWal = new ArrayList<MoviWallet>();
+
+		listWal = daoW.listMov(us.getId());
+
+		for (MoviWallet mw : listWal) {
+		%>
+
+		<div class="main_container">
+
+			<div class="date">
+				<h3>Date</h3>
+				<span><%=mw.getMoviDate()%> </span>
+			</div>
+			<div class="money">
+				<h3>Money</h3>
+				<span><%=mw.getMoney()%> </span>
+			</div>
+			<div class="type">
+				<h3>Movimentation's type</h3>
+				<span><%=mw.getId_type().getDescription()%> </span>
+			</div>
+			<div class="name">
+				<h3>Name</h3>
+				<span><%=mw.getId_user().getPersonName()%> </span>
 			</div>
 
 		</div>

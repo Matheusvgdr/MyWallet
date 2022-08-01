@@ -7,22 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.MoviWallet;
 import model.Movimentation;
 import model.TypeMov;
 import model.User;
 import model.Wallet;
 
-public class MovimentationDAO {
-
+public class MoviWalletDAO {
+	
 	Connection conex = null;
+	
+	public MoviWallet searchForId(int id) {
 
-	public Movimentation searchForId(int id) {
-
-		Movimentation mov = null;
+		MoviWallet mov = null;
 		ResultSet rs = null;
 		conex = DAO.createConnection();
 
-		String sql = "SELECT * FROM tb_movimentation WHERE id=?";
+		String sql = "SELECT * FROM tb_moviWallet WHERE id=?";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -31,15 +32,16 @@ public class MovimentationDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				mov = new Movimentation();
+				mov = new MoviWallet();
 
 				mov.setId(rs.getInt("id"));
 				mov.setMoney(rs.getDouble("money"));
 				mov.setMoviDate(rs.getString("moviDate"));
 				mov.setType(rs.getString("type"));
 				mov.getId_type().setId(rs.getInt("id_type"));
-				;
 				mov.getId_user().setId(rs.getInt("id_user"));
+				mov.getId_account().setNumberAccount(rs.getInt("id_account"));
+				mov.getId_wallet().setId(rs.getInt("id_wallet"));
 
 			}
 
@@ -52,23 +54,23 @@ public class MovimentationDAO {
 	}
 
 	// faz uma movimentação (Saque/Depósito)
-	public boolean insertMovimentation(Movimentation mov) {
+	public boolean insertMoviWallet(MoviWallet mov) {
 
 		boolean result = true;
 		int returnQuery;
 
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_movimentation (moviDate, money, typeMovi, id_user, id_type) VALUES (?, ?, ?, ?,?);";
+		String sql = "INSERT INTO tb_moviWallet (moviDate, money, id_user, id_type, id_wallet) VALUES (?, ?, ?, ?, ?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
 
 			ps.setString(1, mov.getMoviDate());
 			ps.setDouble(2, mov.getMoney());
-			ps.setString(3, mov.getType());
-			ps.setInt(4, mov.getId_user().getId());
-			ps.setInt(5, mov.getId_type().getId());
+			ps.setInt(3, mov.getId_user().getId());
+			ps.setInt(4, mov.getId_type().getId());
+			ps.setInt(5, mov.getId_wallet().getId());
 
 			returnQuery = ps.executeUpdate();
 
@@ -85,17 +87,16 @@ public class MovimentationDAO {
 
 	}
 	
-	//É o que executa os calculos de depositos e saques
-	public boolean verificar(Movimentation conta ) {
+	public boolean verificar(MoviWallet conta ) {
 
-			List<Movimentation> lis = new ArrayList<Movimentation>();
-		    List<Movimentation> listaW = new ArrayList<Movimentation>();
+			List<MoviWallet> lis = new ArrayList<MoviWallet>();
+		    List<MoviWallet> listaW = new ArrayList<MoviWallet>();
 
 			double calcD = 0;
 			
-			lis = this.listDeposits(conta.getId_user().getId(), conta.getId_type().getId());
+			lis = this.listDeposits(conta.getId_user().getId(), conta.getId_type().getId(), conta.getId_wallet().getId());
 			
-			for(Movimentation i: lis){
+			for(MoviWallet i: lis){
 			
 				calcD += i.getMoney();
 				
@@ -103,9 +104,9 @@ public class MovimentationDAO {
 			
 			
 			double calcW = 0;
-			listaW = this.listWithdraw(conta.getId_user().getId(), 2);
+			listaW = this.listWithdraw(conta.getId_user().getId(), conta.getId_type().getId(), conta.getId_wallet().getId());
 			
-			for(Movimentation i: listaW){
+			for(MoviWallet i: listaW){
 			
 				calcW += i.getMoney();
 				
@@ -121,7 +122,6 @@ public class MovimentationDAO {
 				return true;
 			}
 	}
-	
 	// Deleta uma movimentação de um usuário
 	public boolean deleteMovimentation(int id) {
 
@@ -130,7 +130,7 @@ public class MovimentationDAO {
 
 		conex = DAO.createConnection();
 
-		String sql = "DELETE FROM tb_movimentation WHERE id=?;";
+		String sql = "DELETE FROM tb_moviWallet WHERE id=?;";
 
 		try {
 
@@ -154,16 +154,16 @@ public class MovimentationDAO {
 	}
 
 	// Lista todas as movimentações de um usuário
-	public List<Movimentation> listMov(int idUser) {
+	public List<MoviWallet> listMov(int idUser) {
 
-		List<Movimentation> listOfMovimentation = new ArrayList<Movimentation>();
+		List<MoviWallet> listOfMovimentation = new ArrayList<MoviWallet>();
 		ResultSet rs = null;
-		Movimentation mvt = null;
+		MoviWallet mvt = null;
 		User u = null;
 		TypeMov tm = null;
 		conex = DAO.createConnection();
 
-		String sql = "SELECT M.money, M.moviDate, U.personName, T.description FROM tb_movimentation M INNER JOIN tb_users U ON U.id = M.id_user INNER JOIN tb_typeMovi T ON T.id = M.id_type WHERE id_user = ?;";
+		String sql = "SELECT M.money, M.moviDate, U.personName, T.description FROM tb_moviWallet M INNER JOIN tb_users U ON U.id = M.id_user INNER JOIN tb_typeMovi T ON T.id = M.id_type WHERE id_user = ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class MovimentationDAO {
 			while (rs.next()) {
 				u = new User();
 				tm = new TypeMov();
-				mvt = new Movimentation();
+				mvt = new MoviWallet();
 				
 				mvt.setId_user(u);
 				mvt.setId_type(tm);
@@ -194,24 +194,25 @@ public class MovimentationDAO {
 	}
 
 	// Lista todos os depósitos de um usuário
-	public List<Movimentation> listDeposits(int idUser, int idType) {
+	public List<MoviWallet> listDeposits(int idUser, int idType, int idWallet) {
 
-		List<Movimentation> listOfDeposits = new ArrayList<Movimentation>();
+		List<MoviWallet> listOfDeposits = new ArrayList<MoviWallet>();
 		ResultSet rs = null;
-		Movimentation mvt = null;
+		MoviWallet mvt = null;
 		conex = DAO.createConnection();
 
-		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
+		String sql = " SELECT money FROM tb_moviWallet WHERE id_user= ? AND id_type= ? AND id_wallet = ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
 			ps.setInt(1, idUser);
 			ps.setInt(2, idType);
+			ps.setInt(3, idWallet);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				mvt = new Movimentation();
+				mvt = new MoviWallet();
 
 				mvt.setMoney(rs.getDouble("money"));
 
@@ -226,24 +227,25 @@ public class MovimentationDAO {
 	}
 
 	//Lista todos os saques de um usuário
-	public List<Movimentation> listWithdraw(int idUser, int idType) {
+	public List<MoviWallet> listWithdraw(int idUser, int idType, int idWa) {
 
-		List<Movimentation> listOfWithdraws = new ArrayList<Movimentation>();
+		List<MoviWallet> listOfWithdraws = new ArrayList<MoviWallet>();
 		ResultSet rs = null;
-		Movimentation mvt = null;
+		MoviWallet mvt = null;
 		conex = DAO.createConnection();
 
-		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
+		String sql = " SELECT money FROM tb_moviWallet WHERE id_user= ? AND id_type= ? AND id_wallet = ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
 			ps.setInt(1, idUser);
 			ps.setInt(2, idType);
+			ps.setInt(3, idWa);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				mvt = new Movimentation();
+				mvt = new MoviWallet();
 
 				mvt.setMoney(rs.getDouble("money"));
 
@@ -257,14 +259,14 @@ public class MovimentationDAO {
 		return listOfWithdraws;
 	}
 
-	public List<Movimentation> listAllPix(int idUser, int idType) {
+	public List<MoviWallet> listPix(int idUser, int idType) {
 
-		List<Movimentation> listOfPix = new ArrayList<Movimentation>();
+		List<MoviWallet> listOfPix = new ArrayList<MoviWallet>();
 		ResultSet rs = null;
-		Movimentation mvt = null;
+		MoviWallet mvt = null;
 		conex = DAO.createConnection();
 
-		String sql = " SELECT money FROM tb_movimentation WHERE id_user= ? AND id_type= ?;";
+		String sql = " SELECT money FROM tb_moviWallet WHERE id_user= ? AND id_type= ?;";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
@@ -274,7 +276,7 @@ public class MovimentationDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				mvt = new Movimentation();
+				mvt = new MoviWallet();
 
 				mvt.setMoney(rs.getDouble("money"));
 
@@ -287,4 +289,5 @@ public class MovimentationDAO {
 
 		return listOfPix;
 	}
+
 }

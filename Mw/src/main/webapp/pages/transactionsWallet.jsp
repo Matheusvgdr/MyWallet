@@ -120,15 +120,6 @@
 
 					</div>
 
-					<div class="input-data">
-
-						<input type="text" name="value" id="value" autocomplete="off"
-							required>
-						<div class="underline"></div>
-
-						<label>Money</label>
-
-					</div>
 					<input type="hidden" name="idUs" id="idUs" value="<%=us.getId()%>"
 						autocomplete="off" required>
 
@@ -147,41 +138,73 @@
 
 			<div class="main_container">
 				<h2>To Deposit or withdraw your money</h2>
-				<form action="" method="post">
-
+				<form action="../TransactionsWalletServlet" method="post">
+					
+					<input type="hidden" name="idUs" id="idUs" value="<%=us.getId()%>">
+					
+					<input type="hidden" name="dateMovi" id="dateMovi" value="25/02/2001">
+					
+					
+					
+					
 					<div class="input-data">
 
-						<input type="text" name="personName" id="personName"
-							autocomplete="off" required>
+						<input type="text" name="moneyWallet" id="moneyWallet" autocomplete="off" required>
 						<div class="underline"></div>
 
 						<label>Money</label>
 
 					</div>
 					<%
-					List<TypeMov> list;
-					list = (ArrayList<TypeMov>) session.getAttribute("typeMovi");
-					TypeMovDAO t = new TypeMovDAO();
+					
+					WalletService serviceW = new WalletService();
+			        List<Wallet> listW = new ArrayList<Wallet>();
+			     
+			       listW = serviceW.listWallet(us.getId());
 
-					list = t.listar();
 					%>
-					<select name="idType" id="idType">
+					<select name="idWa" id="idWa">
 
 						<option value="0"><strong>Select...</strong></option>
 
 						<%
-						for (TypeMov tp : list) {
+						for (Wallet wa : listW) {
 						%>
 
-						<option value="<%=tp.getId()%>"><strong><%=tp.getDescription()%></strong></option>
-
+						<option value="<%=wa.getId()%>"><strong><%=wa.getNameWallet()%></strong></option>
 
 						<%
 						}
 						%>
 
-
 					</select>
+					
+					<%
+				List<TypeMov> list;
+				list = (ArrayList<TypeMov>) session.getAttribute("typeMovi");
+				TypeMovDAO t = new TypeMovDAO();
+
+				list = t.listar();
+				%>
+
+
+				<select name="idType" id="idType">
+
+					<option value="0"><strong>Select...</strong></option>
+
+					<%
+					for (TypeMov tp : list) {
+					%>
+
+					<option value="<%=tp.getId()%>"><strong><%=tp.getDescription()%></strong></option>
+
+
+					<%
+					}
+					%>
+
+
+				</select>
 
 					<button class="btn">Enter</button>
 

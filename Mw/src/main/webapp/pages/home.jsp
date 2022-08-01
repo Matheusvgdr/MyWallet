@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.MovimentationDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -161,20 +162,18 @@
 		<div class="money">
 			<div class="main_container">
 				<h2>Money</h2>
-				<%
-				if (calcW > calcD) {
-				%>
-				<span>Não é possivel realizar o saque</span>
-
-				<%
-				} else {
-				%>
+			
+				
 
 				<span>R$ <%=totalMoney%></span>
+				<span>€  <%=totalMoney * 0.19 %></span>
+				<span>¥ <%=totalMoney * 1.31%></span>
+				<span>US$ <%=totalMoney * 0.19%></span>
+				<span>£ <%=totalMoney * 0.16%></span>
+				<span>$ <%=totalMoney * 25.48%></span>
 
-				<%
-				}
-				%>
+
+				
 
 			</div>
 			<img src="../imgs/money.svg" alt="">

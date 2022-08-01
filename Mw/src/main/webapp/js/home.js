@@ -35,11 +35,3 @@ if (localStorage.getItem("theme") === "dark") {
   }
 
 
-
-let editUser = document.getElementById("edit");
-let mod = document.querySelector(".modification");
-
-editUser.addEventListener('click', () => {
-     mod.style.visibility = 'visible';
-});
-

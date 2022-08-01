@@ -4,9 +4,11 @@
 <%@page import="service.WalletService" %>
 <%@page import="service.MovimentationService" %>
 <%@page import="model.Movimentation" %>
+<%@page import="model.MoviWallet" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="dao.MovimentationDAO" %>
+<%@page import="dao.MoviWalletDAO" %>
 <%@page import="java.util.Objects" %>
 <!-------------------USUARIO LOGADO------------------------------>
 
@@ -131,7 +133,7 @@ User us = (User) session.getAttribute("userSession");
 
 
     <section id="main_wallet">
-
+    
         <% WalletService serviceW = new WalletService();
         List<Wallet> listW = new ArrayList<Wallet>();
      
@@ -142,9 +144,37 @@ User us = (User) session.getAttribute("userSession");
         <div class="wallet">
             <img src="../imgs/Wallet_brown.svg" alt="">
             <div class="main_container">
+			
+				<%
+    MoviWalletDAO mo = new MoviWalletDAO();
 
+	List<MoviWallet> lis = new ArrayList<MoviWallet>();
+	
+	List<MoviWallet> listaW = new ArrayList<MoviWallet>();
+
+	double calcD = 0;
+	lis = mo.listDeposits(us.getId(), 1, w.getId());
+
+	for (MoviWallet i : lis) {
+
+		calcD += i.getMoney();
+
+	}
+
+	double calcW = 0;
+	listaW = mo.listWithdraw(us.getId(), 2, w.getId());
+	for (MoviWallet i : listaW) {
+
+		calcW += i.getMoney();
+
+	}
+
+	double totalMoney = calcD - calcW;
+				
+				%>
+				
                 <h2><%=w.getNameWallet()%></h2>
-                <span>R$ <%=w.getBudget() %></span>
+                <span>R$ <%=totalMoney %></span>
 
 
             </div>
