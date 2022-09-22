@@ -158,14 +158,7 @@
 				<button class="btn">Enter</button>
 
 
-				<div class="input-data">
-
-					<input type="hidden" name="type" id="type" value="teste"
-						autocomplete="off" required>
-					<div class="underline"></div>
-
-
-				</div>
+			
 
 
 

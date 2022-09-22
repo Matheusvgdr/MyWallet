@@ -41,7 +41,6 @@ public class TransactionsServlet extends HttpServlet {
 		
 		m.setMoney(Integer.parseInt(request.getParameter("money")));
 		m.setMoviDate(request.getParameter("dateMovi"));
-		m.setType(request.getParameter("type"));
 		m.setId_user(u);
 		m.setId_type(tp);
 		

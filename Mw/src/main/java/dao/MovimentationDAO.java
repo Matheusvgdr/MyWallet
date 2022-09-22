@@ -59,16 +59,15 @@ public class MovimentationDAO {
 
 		conex = DAO.createConnection();
 
-		String sql = "INSERT INTO tb_movimentation (moviDate, money, typeMovi, id_user, id_type) VALUES (?, ?, ?, ?,?);";
+		String sql = "INSERT INTO tb_movimentation (moviDate, money, id_user, id_type) VALUES ( ?, ?, ?,?);";
 
 		try {
 			PreparedStatement ps = conex.prepareStatement(sql);
 
 			ps.setString(1, mov.getMoviDate());
 			ps.setDouble(2, mov.getMoney());
-			ps.setString(3, mov.getType());
-			ps.setInt(4, mov.getId_user().getId());
-			ps.setInt(5, mov.getId_type().getId());
+			ps.setInt(3, mov.getId_user().getId());
+			ps.setInt(4, mov.getId_type().getId());
 
 			returnQuery = ps.executeUpdate();
 
@@ -103,7 +102,7 @@ public class MovimentationDAO {
 			
 			
 			double calcW = 0;
-			listaW = this.listWithdraw(conta.getId_user().getId(), 2);
+			listaW = this.listWithdraw(conta.getId_user().getId(),  conta.getId_type().getId());
 			
 			for(Movimentation i: listaW){
 			
@@ -250,12 +249,15 @@ public class MovimentationDAO {
 				listOfWithdraws.add(mvt);
 
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return listOfWithdraws;
 	}
+	
+	
 
 	public List<Movimentation> listAllPix(int idUser, int idType) {
 
