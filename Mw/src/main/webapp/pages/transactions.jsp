@@ -158,9 +158,6 @@
 				<button class="btn">Enter</button>
 
 
-			
-
-
 
 			</form>
 
@@ -170,7 +167,7 @@
 	</section>
 
 
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//cdn.jsdeli vr.net/npm/sweetalert2@11"></script>
 	<script src="../js/home.js"></script>
 	<%
 	} else {

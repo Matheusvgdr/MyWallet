@@ -5,9 +5,9 @@ public class Movimentation {
 	private int id;
 	private String moviDate;
 	private double money;
-	private String type;
 	private User id_user;
 	private TypeMov id_type;
+	
 	public int getId() {
 		return id;
 	}
@@ -26,12 +26,6 @@ public class Movimentation {
 	public void setMoney(double money) {
 		this.money = money;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	public User getId_user() {
 		return id_user;
 	}
@@ -47,7 +41,7 @@ public class Movimentation {
 	
 	@Override
 	public String toString() {
-		return "Movimentation [id=" + id + ", moviDate=" + moviDate + ", money=" + money + ", type=" + type
+		return "Movimentation [id=" + id + ", moviDate=" + moviDate + ", money=" + money
 				+ ", id_user=" + id_user + ", id_type=" + id_type + "]";
 	}
 	

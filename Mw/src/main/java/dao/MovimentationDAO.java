@@ -36,9 +36,7 @@ public class MovimentationDAO {
 				mov.setId(rs.getInt("id"));
 				mov.setMoney(rs.getDouble("money"));
 				mov.setMoviDate(rs.getString("moviDate"));
-				mov.setType(rs.getString("type"));
 				mov.getId_type().setId(rs.getInt("id_type"));
-				;
 				mov.getId_user().setId(rs.getInt("id_user"));
 
 			}

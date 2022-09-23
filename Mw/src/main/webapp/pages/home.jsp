@@ -117,9 +117,9 @@
 	}
 
 	double calcW = 0;
-	lis = mo.listWithdraw(us.getId(), 2);
+	listaW = mo.listWithdraw(us.getId(), 2);
 
-	for (Movimentation i : lis) {
+	for (Movimentation i : listaW) {
 
 		calcW += i.getMoney();
 
